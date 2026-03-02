@@ -1,0 +1,11 @@
+[
+  {
+    "flowId": "69a1bf2d8133d208f30c9122",
+    "flowName": "New account",
+    "trigger": {
+      "key": "auth.beforeCreate",
+      "domain": "functions",
+      "templateFound": true
+    }
+  }
+]

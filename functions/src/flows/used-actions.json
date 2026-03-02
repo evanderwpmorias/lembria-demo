@@ -1,0 +1,17 @@
+[
+  {
+    "flowId": "69a1bf2d8133d208f30c9122",
+    "flowName": "New account",
+    "actions": [
+      {
+        "key": "mongoose.findMany",
+        "templateFound": true
+      },
+      {
+        "key": "mongoose.create",
+        "templateFound": true
+      }
+    ],
+    "missingTemplates": []
+  }
+]

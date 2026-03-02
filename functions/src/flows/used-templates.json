@@ -1,0 +1,27 @@
+{
+  "generatedAt": "2026-03-02T18:26:08.516Z",
+  "totalFlows": 1,
+  "flows": [
+    {
+      "flowId": "69a1bf2d8133d208f30c9122",
+      "flowName": "New account",
+      "outputFile": "newAccount.ts",
+      "trigger": {
+        "key": "auth.beforeCreate",
+        "domain": "functions",
+        "templateFound": true
+      },
+      "actions": [
+        {
+          "key": "mongoose.findMany",
+          "templateFound": true
+        },
+        {
+          "key": "mongoose.create",
+          "templateFound": true
+        }
+      ],
+      "missingTemplates": []
+    }
+  ]
+}
