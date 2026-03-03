@@ -1,4 +1,5 @@
-import { flowActionHandlers } from './actions';
+import { mongooseFindManyAction } from './actions/mongooseFindMany';
+import { mongooseCreateAction } from './actions/mongooseCreate';
 import { newAccountData } from './data/newAccount';
 import { HttpsError } from 'firebase-functions/v2/identity';
 import { mongoose } from 'mongoose';
@@ -17,6 +18,11 @@ const resolveTemplateKey = (moduleRef?: any): string => {
 	return moduleRef?.key || '';
 };
 
+const actionHandlers: Record<string, (params?: any) => Promise<any>> = {
+	"mongoose.findMany": mongooseFindManyAction,
+	"mongoose.create": mongooseCreateAction
+};
+
 export const newAccountFlow = async (input: any = {}) => {
 	const steps = newAccountData?.steps || [];
 	const flowMeta = {
@@ -33,7 +39,7 @@ export const newAccountFlow = async (input: any = {}) => {
   const stepInput1 = { ...context, ...(stepMeta1?.inputs || {}), ...(stepMeta1?.inputMap || {}) };
   const stepConfig1 = stepMeta1?.config || {};
   const stepActionKey1 = resolveTemplateKey(stepMeta1?.actionId);
-  const stepActionHandler1 = flowActionHandlers[stepActionKey1];
+  const stepActionHandler1 = actionHandlers[stepActionKey1];
   const stepResult1 = stepActionHandler1
   	? await stepActionHandler1({
   			input: stepInput1,
@@ -55,7 +61,7 @@ export const newAccountFlow = async (input: any = {}) => {
   const stepInput2 = { ...context, ...(stepMeta2?.inputs || {}), ...(stepMeta2?.inputMap || {}) };
   const stepConfig2 = stepMeta2?.config || {};
   const stepActionKey2 = resolveTemplateKey(stepMeta2?.actionId);
-  const stepActionHandler2 = flowActionHandlers[stepActionKey2];
+  const stepActionHandler2 = actionHandlers[stepActionKey2];
   const stepResult2 = stepActionHandler2
   	? await stepActionHandler2({
   			input: stepInput2,
@@ -77,7 +83,7 @@ export const newAccountFlow = async (input: any = {}) => {
   const stepInput3 = { ...context, ...(stepMeta3?.inputs || {}), ...(stepMeta3?.inputMap || {}) };
   const stepConfig3 = stepMeta3?.config || {};
   const stepActionKey3 = resolveTemplateKey(stepMeta3?.actionId);
-  const stepActionHandler3 = flowActionHandlers[stepActionKey3];
+  const stepActionHandler3 = actionHandlers[stepActionKey3];
   const stepResult3 = stepActionHandler3
   	? await stepActionHandler3({
   			input: stepInput3,
@@ -99,7 +105,7 @@ export const newAccountFlow = async (input: any = {}) => {
   const stepInput4 = { ...context, ...(stepMeta4?.inputs || {}), ...(stepMeta4?.inputMap || {}) };
   const stepConfig4 = stepMeta4?.config || {};
   const stepActionKey4 = resolveTemplateKey(stepMeta4?.actionId);
-  const stepActionHandler4 = flowActionHandlers[stepActionKey4];
+  const stepActionHandler4 = actionHandlers[stepActionKey4];
   const stepResult4 = stepActionHandler4
   	? await stepActionHandler4({
   			input: stepInput4,
