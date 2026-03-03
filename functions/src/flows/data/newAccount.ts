@@ -256,6 +256,28 @@ export const newAccountData = {
     "config": {
       "model": "users"
     }
+  },
+  {
+    "type": "condition",
+    "name": "condition step",
+    "onError": "stop",
+    "id": "step-1772535872125-y4edo"
+  },
+  {
+    "type": "script",
+    "name": "script step",
+    "script": "throw new HttpsError('invalid-argument', \"Unauthorized email\");",
+    "onError": "stop",
+    "id": "step-1772535982638-moyvy",
+    "imports": [
+      {
+        "type": "snippet",
+        "snippet": "import { HttpsError } from \"firebase-functions/v2/identity\";",
+        "variableName": "HttpsError",
+        "resource": "firebase-functions/v2/identity",
+        "editable": false
+      }
+    ]
   }
 ],
 };

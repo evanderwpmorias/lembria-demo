@@ -1,5 +1,7 @@
 import { flowActionHandlers } from './actions';
 import { newAccountData } from './data/newAccount';
+import { HttpsError } from 'firebase-functions/v2/identity';
+import { mongoose } from 'mongoose';
 
 const toStepKey = (value: any, fallback: string = 'step') => {
 	const normalized = String(value || fallback)
@@ -69,6 +71,50 @@ export const newAccountFlow = async (input: any = {}) => {
   	...(typeof stepResult2 === 'object' && stepResult2 !== null ? stepResult2 : { value: stepResult2 })
   };
 
+
+  const stepMeta3 = steps[2] || {};
+  const stepName3 = toStepKey(stepMeta3?.name || stepMeta3?.id || 'step3');
+  const stepInput3 = { ...context, ...(stepMeta3?.inputs || {}), ...(stepMeta3?.inputMap || {}) };
+  const stepConfig3 = stepMeta3?.config || {};
+  const stepActionKey3 = resolveTemplateKey(stepMeta3?.actionId);
+  const stepActionHandler3 = flowActionHandlers[stepActionKey3];
+  const stepResult3 = stepActionHandler3
+  	? await stepActionHandler3({
+  			input: stepInput3,
+  			config: stepConfig3,
+  			step: stepMeta3,
+  			context: context,
+  			flowMeta,
+  		})
+  	: { skipped: true, reason: 'No action handler for ' + (stepActionKey3 || 'unknown') };
+  results[stepName3] = stepResult3;
+  context = {
+  	...context,
+  	...(typeof stepResult3 === 'object' && stepResult3 !== null ? stepResult3 : { value: stepResult3 })
+  };
+
+
+  const stepMeta4 = steps[3] || {};
+  const stepName4 = toStepKey(stepMeta4?.name || stepMeta4?.id || 'step4');
+  const stepInput4 = { ...context, ...(stepMeta4?.inputs || {}), ...(stepMeta4?.inputMap || {}) };
+  const stepConfig4 = stepMeta4?.config || {};
+  const stepActionKey4 = resolveTemplateKey(stepMeta4?.actionId);
+  const stepActionHandler4 = flowActionHandlers[stepActionKey4];
+  const stepResult4 = stepActionHandler4
+  	? await stepActionHandler4({
+  			input: stepInput4,
+  			config: stepConfig4,
+  			step: stepMeta4,
+  			context: context,
+  			flowMeta,
+  		})
+  	: { skipped: true, reason: 'No action handler for ' + (stepActionKey4 || 'unknown') };
+  results[stepName4] = stepResult4;
+  context = {
+  	...context,
+  	...(typeof stepResult4 === 'object' && stepResult4 !== null ? stepResult4 : { value: stepResult4 })
+  };
+
 	return { context, results };
 };
 
@@ -78,4 +124,11 @@ export const newAccountFlowMeta = {
 	triggerKey: newAccountData?.triggerKey || '',
 	actionKeys: ["mongoose.findMany","mongoose.create"],
 	missingTemplates: [],
+};
+
+export const newAccountContextHandler = (payload?: any) => {
+	if (payload && typeof payload === 'object') {
+		return newAccountFlow({ ...payload, flowMeta: newAccountFlowMeta });
+	}
+	return newAccountFlow({ value: payload, flowMeta: newAccountFlowMeta });
 };
