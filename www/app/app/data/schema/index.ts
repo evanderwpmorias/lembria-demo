@@ -1,0 +1,7 @@
+export { families as familiesSchema } from './families'
+export { persons as personsSchema } from './persons'
+export { stories as storiesSchema } from './stories'
+export { users as usersSchema } from './users'
+export { memories as memoriesSchema } from './memories'
+export { sessions as sessionsSchema } from './sessions'
+export { messages as messagesSchema } from './messages'

@@ -1,0 +1,296 @@
+@import url(theme.css);
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,1,0");
+@import "tailwindcss";
+
+@theme {
+    --font-title: Patua One;
+    --font-body: Inter;
+
+    --color-primary: var(--md-sys-color-primary);
+    --color-surface-tint: var(--md-sys-color-surface-tint);
+    --color-on-primary: var(--md-sys-color-on-primary);
+    --color-primary-container: var(--md-sys-color-primary-container);
+    --color-on-primary-container: var(--md-sys-color-on-primary-container);
+    --color-secondary: var(--md-sys-color-secondary);
+    --color-on-secondary: var(--md-sys-color-on-secondary);
+    --color-secondary-container: var(--md-sys-color-secondary-container);
+    --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
+    --color-tertiary: var(--md-sys-color-tertiary);
+    --color-on-tertiary: var(--md-sys-color-on-tertiary);
+    --color-tertiary-container: var(--md-sys-color-tertiary-container);
+    --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
+    --color-error: var(--md-sys-color-error);
+    --color-on-error: var(--md-sys-color-on-error);
+    --color-error-container: var(--md-sys-color-error-container);
+    --color-on-error-container: var(--md-sys-color-on-error-container);
+    --color-background: var(--md-sys-color-background);
+    --color-on-background: var(--md-sys-color-on-background);
+    --color-surface: var(--md-sys-color-surface);
+    --color-on-surface: var(--md-sys-color-on-surface);
+    --color-surface-variant: var(--md-sys-color-surface-variant);
+    --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
+    --color-outline: var(--md-sys-color-outline);
+    --color-outline-variant: var(--md-sys-color-outline-variant);
+    --color-shadow: var(--md-sys-color-shadow);
+    --color-scrim: var(--md-sys-color-scrim);
+    --color-inverse-surface: var(--md-sys-color-inverse-surface);
+    --color-inverse-on-surface: var(--md-sys-color-inverse-on-surface);
+    --color-inverse-primary: var(--md-sys-color-inverse-primary);
+    --color-primary-fixed: var(--md-sys-color-primary-fixed);
+    --color-on-primary-fixed: var(--md-sys-color-on-primary-fixed);
+    --color-primary-fixed-dim: var(--md-sys-color-primary-fixed-dim);
+    --color-on-primary-fixed-variant: var(--md-sys-color-on-primary-fixed-variant);
+    --color-secondary-fixed: var(--md-sys-color-secondary-fixed);
+    --color-on-secondary-fixed: var(--md-sys-color-on-secondary-fixed);
+    --color-secondary-fixed-dim: var(--md-sys-color-secondary-fixed-dim);
+    --color-on-secondary-fixed-variant: var(--md-sys-color-on-secondary-fixed-variant);
+    --color-tertiary-fixed: var(--md-sys-color-tertiary-fixed);
+    --color-on-tertiary-fixed: var(--md-sys-color-on-tertiary-fixed);
+    --color-tertiary-fixed-dim: var(--md-sys-color-tertiary-fixed-dim);
+    --color-on-tertiary-fixed-variant: var(--md-sys-color-on-tertiary-fixed-variant);
+    --color-surface-dim: var(--md-sys-color-surface-dim);
+    --color-surface-bright: var(--md-sys-color-surface-bright);
+    --color-surface-container-lowest: var(--md-sys-color-surface-container-lowest);
+    --color-surface-container-low: var(--md-sys-color-surface-container-low);
+    --color-surface-container: var(--md-sys-color-surface-container);
+    --color-surface-container-high: var(--md-sys-color-surface-container-high);
+    --color-surface-container-highest: var(--md-sys-color-surface-container-highest);
+
+    /* Primary palette */
+    --color-primary-0: #000000;
+    --color-primary-10: #001f24;
+    --color-primary-20: #00363e;
+    --color-primary-30: #004e59;
+    --color-primary-40: #006875;
+    --color-primary-50: #008393;
+    --color-primary-60: #009fb2;
+    --color-primary-70: #25bcd1;
+    --color-primary-80: #50d7ed;
+    --color-primary-90: #9defff;
+    --color-primary-95: #d2f7ff;
+    --color-primary-99: #f7fdff;
+    --color-primary-100: #ffffff;
+
+    /* Secondary palette */
+    --color-secondary-0: #000000;
+    --color-secondary-10: #051f23;
+    --color-secondary-20: #1c3438;
+    --color-secondary-30: #334b4f;
+    --color-secondary-40: #4a6267;
+    --color-secondary-50: #637b80;
+    --color-secondary-60: #7c959a;
+    --color-secondary-70: #96b0b5;
+    --color-secondary-80: #b1cbd0;
+    --color-secondary-90: #cde7ed;
+    --color-secondary-95: #dbf5fb;
+    --color-secondary-99: #f7fdff;
+    --color-secondary-100: #ffffff;
+
+    /* Tertiary palette */
+    --color-tertiary-0: #000000;
+    --color-tertiary-10: #0f1a37;
+    --color-tertiary-20: #252f4d;
+    --color-tertiary-30: #3c4665;
+    --color-tertiary-40: #535d7e;
+    --color-tertiary-50: #6c7698;
+    --color-tertiary-60: #8690b2;
+    --color-tertiary-70: #a0aace;
+    --color-tertiary-80: #bbc5ea;
+    --color-tertiary-90: #dbe1ff;
+    --color-tertiary-95: #eef0ff;
+    --color-tertiary-99: #fefbff;
+    --color-tertiary-100: #ffffff;
+
+    /* Neutral palette */
+    --color-neutral-0: #000000;
+    --color-neutral-10: #191c1d;
+    --color-neutral-20: #2e3132;
+    --color-neutral-30: #444748;
+    --color-neutral-40: #5c5f60;
+    --color-neutral-50: #747878;
+    --color-neutral-60: #8e9192;
+    --color-neutral-70: #a9acac;
+    --color-neutral-80: #c4c7c7;
+    --color-neutral-90: #e1e3e3;
+    --color-neutral-95: #eff1f2;
+    --color-neutral-99: #fbfcfd;
+    --color-neutral-100: #ffffff;
+
+    /* NeutralVariant palette */
+    --color-neutral-variant-0: #000000;
+    --color-neutral-variant-10: #141d1f;
+    --color-neutral-variant-20: #293234;
+    --color-neutral-variant-30: #3f484a;
+    --color-neutral-variant-40: #576062;
+    --color-neutral-variant-50: #6f797b;
+    --color-neutral-variant-60: #899294;
+    --color-neutral-variant-70: #a3adaf;
+    --color-neutral-variant-80: #bfc8ca;
+    --color-neutral-variant-90: #dbe4e6;
+    --color-neutral-variant-95: #e9f2f5;
+    --color-neutral-variant-99: #f7fdff;
+    --color-neutral-variant-100: #ffffff;
+
+    /* Error palette */
+    --color-error-0: #000000;
+    --color-error-10: #410002;
+    --color-error-20: #690005;
+    --color-error-30: #93000a;
+    --color-error-40: #ba1a1a;
+    --color-error-50: #de3730;
+    --color-error-60: #ff5449;
+    --color-error-70: #ff897d;
+    --color-error-80: #ffb4ab;
+    --color-error-90: #ffdad6;
+    --color-error-95: #ffedea;
+    --color-error-99: #fffbff;
+    --color-error-100: #ffffff;
+
+}
+
+@layer base {}
+
+@layer components {
+
+    /* Button foundations */
+    .btn-base {
+        border-radius: var(--radius-3xl);
+        font-weight: var(--font-weight-normal);
+        line-height: var(--leading-5);
+        letter-spacing: -0.01em;
+        transition-property: all;
+        transition-timing-function: var(--ease-in-out);
+        transition-duration: var(--duration-150);
+        display: inline-block;
+        text-align: center;
+
+    }
+
+    .btn-rounded-base,
+    .btn-rounded-secondary {
+        transition-property: all;
+        transition-timing-function: var(--ease-in-out);
+        transition-duration: var(--duration-150);
+        text-align: center;
+        padding: 0.5rem;
+        border-radius: calc(var(--radius-3xl) * 6);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.02rem;
+    }
+
+    .btn-rounded-base:hover {
+        background-color: var(--color-primary-10);
+    }
+
+    .btn-rounded-secondary:hover {
+        background-color: var(--color-secondary-container);
+    }
+
+    .btn-rounded-normal {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .btn {
+        /* inherits btn-base */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        padding: 12px 24px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-icon {
+        /* inherits btn-base */
+        padding: 1rem 0.25rem;
+    }
+
+    /* ------- Button variants ------- */
+    .btn-filled {
+        background-color: var(--color-primary);
+        color: var(--color-on-primary);
+    }
+
+    .btn-filled-tonal:hover {
+        background-color: var(--color-surface-variant);
+    }
+
+    .btn-outlined {
+        color: var(--color-primary);
+        border: 1px solid var(--color-outline);
+    }
+
+    .btn-disabled {
+        background-color: var(--color-surface-variant);
+        color: var(--color-on-surface-variant);
+        border: 1px solid var(--color-surface-variant);
+    }
+
+    /* Chips */
+    .chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--text-xs);
+        font-weight: var(--font-weight-medium);
+        padding: 0.5rem 0.75rem;
+        line-height: var(--leading-2);
+        cursor: pointer;
+    }
+
+    .chip-filled {
+        background-color: var(--color-secondary);
+        color: var(--color-on-secondary);
+        border-radius: var(--radius-xl);
+        border: none;
+    }
+
+    .chip-outlined {
+        color: var(--color-on-surface-variant);
+        border: 1px solid var(--color-outline);
+        border-radius: var(--radius-xl);
+    }
+
+    /* Links & messages */
+    .link {
+        color: var(--color-primary);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .error-msg {
+        color: var(--color-error);
+    }
+
+    /* Cards */
+    .card {
+        border-radius: var(--radius-2xl);
+        padding: 1rem;
+    }
+
+    .card-neutral {
+        background-color: var(--color-surface-variant);
+    }
+
+    .card-primary-container {
+        background-color: var(--color-primary-container);
+    }
+
+    .card-elevated {
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .card-elevated:hover {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-card {
+        padding: 3rem 2rem;
+        border-radius: var(--radius-2xl);
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        background-color: var(--color-surface-variant);
+    }
+}
