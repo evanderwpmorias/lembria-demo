@@ -1,5 +1,3 @@
-import { mongoose } from 'mongoose';
-
 export type FlowActionHandlerParams = {
 	input?: any;
 	config?: Record<string, any>;
@@ -8,8 +6,12 @@ export type FlowActionHandlerParams = {
 	flowMeta?: Record<string, any>;
 };
 
-export const mongooseCreateAction = async (params: FlowActionHandlerParams = {}) => {
-  const Model = mongoose.model(params.config.model);
-  const document = await Model.create(params.input.data);
-  return { document };
+export const ${action.name} = async (params: FlowActionHandlerParams = {}, model?: any) => {
+  try {
+    const doc = new model(params.input?.data);
+    await doc.save();
+    return doc.toJSON();
+  } catch (error: any) {
+    return false;
+  }
 };
