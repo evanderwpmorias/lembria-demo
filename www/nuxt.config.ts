@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   
   css: ["./assets/css/main.css"],
   runtimeConfig: {
+    mongodbUri: process.env.MONGODB_URI,
     googleAppicationCreds : process.env.GOOGLE_APPLICATION_CREDENTIALS,
     googleServiceCert: {
       type: process.env.G_CREDS_TYPE,
