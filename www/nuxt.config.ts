@@ -1,3 +1,5 @@
+
+import tailwindcss from "@tailwindcss/vite";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -5,6 +7,10 @@ export default defineNuxtConfig({
   pages: true,
   
   css: ["./assets/css/main.css"],
+  imports: {
+    autoImport: true,
+    exclude: ['server/data/**/*', 'server/models/**/*', 'server/helpers/**/*', 'app/utils/**/*', 'app/data/**/*' ],
+  },
   runtimeConfig: {
     mongodbUri: process.env.MONGODB_URI,
     googleAppicationCreds : process.env.GOOGLE_APPLICATION_CREDENTIALS,

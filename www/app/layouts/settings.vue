@@ -1,3 +1,8 @@
+<script lang="ts">
+export default {
+  name: "settings"
+};
+</script>
 <script setup lang="ts">
 // UserSettings
 definePageMeta({
@@ -6,7 +11,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div id="undefined"  class="layout-settings ">
+  <div id="settings"  class="layout-settings ">
     <div><!-- Empty layout --></div>
   </div>
 </template>
