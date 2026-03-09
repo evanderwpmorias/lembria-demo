@@ -1,7 +1,7 @@
 
-    import {sessions as sessionsModel, handleGetById, handleDelete, handlePut, handlePatch, handleError } from '@/mongoSchema'
-    import { corsHandler } from '@/helpers/0.0.1/cors'
-   // import { authorizeRequest } from '@/helpers/0.0.1/auth-middleware'
+    import {sessions as sessionsModel, handleGetById, handleDelete, handlePut, handlePatch, handleError } from '#server/mongoSchema'
+    import { corsHandler } from '#server/helpers/0.0.1/cors'
+   // import { authorizeRequest } from '#server/helpers/0.0.1/auth-middleware'
 
         export default defineEventHandler(async (event) => {
             if(corsHandler(event)) return;

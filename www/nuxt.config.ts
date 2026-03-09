@@ -1,15 +1,19 @@
 
 import tailwindcss from "@tailwindcss/vite";
+import { fileURLToPath } from "node:url";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   pages: true,
   
-  css: ["./assets/css/main.css"],
+  // css: ["@/assets/css/main.css"],
   imports: {
     autoImport: true,
-    exclude: ['server/data/**/*', 'server/models/**/*', 'server/helpers/**/*', 'app/utils/**/*', 'app/data/**/*' ],
+    dirs: ['./composables'],
+    transform: {
+      exclude: [/\.\/server\/data\/.*/, /\.\/server\/models\/.*/, /\.\/server\/helpers\/.*/, /\.\/app\/utils\/.*/, /\.\/app\/data\/.*/]
+    }
   },
   runtimeConfig: {
     mongodbUri: process.env.MONGODB_URI,
@@ -55,6 +59,7 @@ export default defineNuxtConfig({
         errorMap: 'debug',
     },
   },
+
   vue: {
     compilerOptions: {
       isCustomElement: (tag) => tag.startsWith('md-')

@@ -1,20 +1,25 @@
-<script lang="ts">
-export default {
-  name: "settings"
-};
-</script>
 <script setup lang="ts">
-// UserSettings
-definePageMeta({
-  layout: false // This is a layout component
-});
+
 </script>
 
 <template>
-  <div id="settings"  class="layout-settings ">
-    <div><!-- Empty layout --></div>
+  <div id=""  class="layout-auth ">
+  <div class="min-h-screen flex items-center justify-center bg-gray-50">
+    <div class="w-full max-w-sm bg-white shadow rounded p-8 min-h-[300px]" action="">
+      <slot class="text-2xl mb-4"></slot>
+    </div>
+  </div>
   </div>
 </template>
+
+<style scoped>
+/* Add any layout-specific styles here */
+.layout-auth {
+  /* Layout styles */
+  
+}
+</style>
+
 
 <style scoped>
 /* Add any layout-specific styles here */

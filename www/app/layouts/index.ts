@@ -1,3 +1,3 @@
-export { settings as settingsLayout } from './settings.vue'
-export { defaut as defautLayout } from './defaut.vue'
-export { auth as authLayout } from './auth.vue'
+export { default as settingsLayout } from './settings.vue'
+export { default as defautLayout } from './defaut.vue'
+export { default as authLayout } from './auth.vue'
