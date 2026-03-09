@@ -1,0 +1,9 @@
+env:
+  - variable: DEMO_AGENT_MODEL
+    secret: DEMO_AGENT_MODEL
+
+  - variable: GOOGLE_API_KEY
+    secret: GOOGLE_API_KEY
+
+  - variable: GOOGLE_GENAI_USE_VERTEXAI
+    secret: GOOGLE_GENAI_USE_VERTEXAI
