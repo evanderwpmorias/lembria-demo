@@ -1,0 +1,12 @@
+.env
+app/.env
+.venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+tests/
+assets/
+server.log

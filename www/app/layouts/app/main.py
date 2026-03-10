@@ -22,15 +22,14 @@ load_dotenv(Path(__file__).parent / ".env")
 
 # Import agent after loading environment variables
 # pylint: disable=wrong-import-position
-from app.google_search_agent.agent import agent  # noqa: E402
+from google_search_agent.agent import agent  # noqa: E402
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 
 # Suppress Pydantic serialization warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")

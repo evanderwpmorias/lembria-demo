@@ -9,7 +9,7 @@ from google.adk.tools import google_search
 # - Gemini Live API: gemini-2.5-flash-native-audio-preview-12-2025
 # - Vertex AI Live API: gemini-live-2.5-flash-native-audio
 agent = Agent(
-    name="reception_interviewer",
+    name="google_search_agent",
     model=os.getenv(
         "DEMO_AGENT_MODEL", "gemini-2.5-flash-native-audio-preview-12-2025"
     ),
