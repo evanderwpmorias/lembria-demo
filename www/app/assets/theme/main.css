@@ -58,77 +58,77 @@
 
     /* Primary palette */
     --color-primary-0: #000000;
-    --color-primary-10: #001f24;
-    --color-primary-20: #00363e;
-    --color-primary-30: #004e59;
-    --color-primary-40: #006875;
-    --color-primary-50: #008393;
-    --color-primary-60: #009fb2;
-    --color-primary-70: #25bcd1;
-    --color-primary-80: #50d7ed;
-    --color-primary-90: #9defff;
-    --color-primary-95: #d2f7ff;
-    --color-primary-99: #f7fdff;
+    --color-primary-10: #410002;
+    --color-primary-20: #611110;
+    --color-primary-30: #802824;
+    --color-primary-40: #9f3f39;
+    --color-primary-50: #bf574f;
+    --color-primary-60: #df7066;
+    --color-primary-70: #ff897f;
+    --color-primary-80: #ffb4ac;
+    --color-primary-90: #ffdad6;
+    --color-primary-95: #ffedea;
+    --color-primary-99: #fffbff;
     --color-primary-100: #ffffff;
 
     /* Secondary palette */
     --color-secondary-0: #000000;
-    --color-secondary-10: #051f23;
-    --color-secondary-20: #1c3438;
-    --color-secondary-30: #334b4f;
-    --color-secondary-40: #4a6267;
-    --color-secondary-50: #637b80;
-    --color-secondary-60: #7c959a;
-    --color-secondary-70: #96b0b5;
-    --color-secondary-80: #b1cbd0;
-    --color-secondary-90: #cde7ed;
-    --color-secondary-95: #dbf5fb;
-    --color-secondary-99: #f7fdff;
+    --color-secondary-10: #1a1c1c;
+    --color-secondary-20: #2f3131;
+    --color-secondary-30: #454747;
+    --color-secondary-40: #5d5f5f;
+    --color-secondary-50: #767777;
+    --color-secondary-60: #909191;
+    --color-secondary-70: #aaabab;
+    --color-secondary-80: #c6c6c7;
+    --color-secondary-90: #e2e2e2;
+    --color-secondary-95: #f1f1f1;
+    --color-secondary-99: #fcfcfc;
     --color-secondary-100: #ffffff;
 
     /* Tertiary palette */
     --color-tertiary-0: #000000;
-    --color-tertiary-10: #0f1a37;
-    --color-tertiary-20: #252f4d;
-    --color-tertiary-30: #3c4665;
-    --color-tertiary-40: #535d7e;
-    --color-tertiary-50: #6c7698;
-    --color-tertiary-60: #8690b2;
-    --color-tertiary-70: #a0aace;
-    --color-tertiary-80: #bbc5ea;
-    --color-tertiary-90: #dbe1ff;
-    --color-tertiary-95: #eef0ff;
-    --color-tertiary-99: #fefbff;
+    --color-tertiary-10: #410000;
+    --color-tertiary-20: #690001;
+    --color-tertiary-30: #910906;
+    --color-tertiary-40: #b4271c;
+    --color-tertiary-50: #d74131;
+    --color-tertiary-60: #fa5a47;
+    --color-tertiary-70: #ff8a79;
+    --color-tertiary-80: #ffb4a9;
+    --color-tertiary-90: #ffdad5;
+    --color-tertiary-95: #ffedea;
+    --color-tertiary-99: #fffbff;
     --color-tertiary-100: #ffffff;
 
     /* Neutral palette */
     --color-neutral-0: #000000;
-    --color-neutral-10: #191c1d;
-    --color-neutral-20: #2e3132;
-    --color-neutral-30: #444748;
-    --color-neutral-40: #5c5f60;
-    --color-neutral-50: #747878;
-    --color-neutral-60: #8e9192;
-    --color-neutral-70: #a9acac;
-    --color-neutral-80: #c4c7c7;
-    --color-neutral-90: #e1e3e3;
-    --color-neutral-95: #eff1f2;
-    --color-neutral-99: #fbfcfd;
+    --color-neutral-10: #1b1c1c;
+    --color-neutral-20: #303031;
+    --color-neutral-30: #464747;
+    --color-neutral-40: #5e5e5e;
+    --color-neutral-50: #777777;
+    --color-neutral-60: #919090;
+    --color-neutral-70: #acabab;
+    --color-neutral-80: #c7c6c6;
+    --color-neutral-90: #e3e2e2;
+    --color-neutral-95: #f2f0f0;
+    --color-neutral-99: #fefcfb;
     --color-neutral-100: #ffffff;
 
     /* NeutralVariant palette */
     --color-neutral-variant-0: #000000;
-    --color-neutral-variant-10: #141d1f;
-    --color-neutral-variant-20: #293234;
-    --color-neutral-variant-30: #3f484a;
-    --color-neutral-variant-40: #576062;
-    --color-neutral-variant-50: #6f797b;
-    --color-neutral-variant-60: #899294;
-    --color-neutral-variant-70: #a3adaf;
-    --color-neutral-variant-80: #bfc8ca;
-    --color-neutral-variant-90: #dbe4e6;
-    --color-neutral-variant-95: #e9f2f5;
-    --color-neutral-variant-99: #f7fdff;
+    --color-neutral-variant-10: #251917;
+    --color-neutral-variant-20: #3b2d2c;
+    --color-neutral-variant-30: #534341;
+    --color-neutral-variant-40: #6b5a59;
+    --color-neutral-variant-50: #857371;
+    --color-neutral-variant-60: #a08c8a;
+    --color-neutral-variant-70: #bba6a4;
+    --color-neutral-variant-80: #d8c2bf;
+    --color-neutral-variant-90: #f5dddb;
+    --color-neutral-variant-95: #ffedea;
+    --color-neutral-variant-99: #fffbff;
     --color-neutral-variant-100: #ffffff;
 
     /* Error palette */

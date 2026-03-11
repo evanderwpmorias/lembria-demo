@@ -2,6 +2,7 @@
 // import '~/theme/theme.css'
 import '~/assets/theme/main.css'
 import { onMounted } from 'vue';
+import { useUserStore } from '@/stores/auth';
 // import { getIdTokenResult } from 'firebase/auth';
 // // import { useUserStore } from '@/stores/auth';
 // import { getCurrentUser } from '@/utils/firebase/auth';
@@ -16,10 +17,12 @@ import { onMounted } from 'vue';
 
 // let user = getCurrentUser();
 
+const userStore = useUserStore();
+
 
 
 onMounted(async () => {
-  // userStore.initAuth();
+  userStore.initAuth();
 
 })
 </script>
