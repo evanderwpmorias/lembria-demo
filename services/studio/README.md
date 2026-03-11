@@ -190,6 +190,84 @@ gcloud run deploy studio-bidi-demo \
   --set-env-vars GOOGLE_GENAI_USE_VERTEXAI=FALSE,GOOGLE_API_KEY=your_api_key_here
 ```
 
+## Deploy To Vertex AI Agent Engine
+
+This repo contains two different deploy targets:
+
+- The FastAPI app in `app/main.py` is for the browser-based live demo.
+- The ADK agent in `app/google_search_agent` is the part you deploy to Vertex AI Agent Engine.
+
+The supported CLI path is:
+
+1. Use `gcloud` for project selection, authentication, API enablement, and bucket setup.
+2. Use `adk deploy agent_engine` to create the Agent Engine resource.
+
+### Prerequisites
+
+```bash
+gcloud auth login
+gcloud auth application-default login
+gcloud config set project YOUR_PROJECT_ID
+gcloud services enable aiplatform.googleapis.com storage.googleapis.com
+```
+
+Install the deployment dependencies:
+
+```bash
+uv sync
+uv pip install -r requirements-agent-engine.txt
+```
+
+### One-Command PowerShell Deploy
+
+From `services/studio` on Windows:
+
+```powershell
+pwsh ./scripts/deploy-agent-engine.ps1 \
+  -ProjectId YOUR_PROJECT_ID \
+  -Region us-central1 \
+  -DisplayName studio-google-search-agent
+```
+
+The script will:
+
+- set the active `gcloud` project
+- enable the required APIs
+- create a staging bucket if needed
+- set Vertex-specific environment variables for the agent
+- run `uv run adk deploy agent_engine` against `app/google_search_agent`
+
+### Raw CLI Commands
+
+If you want to run the steps manually instead of using the script:
+
+```bash
+gcloud auth application-default login
+gcloud config set project YOUR_PROJECT_ID
+gcloud services enable aiplatform.googleapis.com storage.googleapis.com
+gcloud storage buckets create gs://YOUR_PROJECT_ID-agent-engine --location=us-central1
+```
+
+```bash
+set GOOGLE_GENAI_USE_VERTEXAI=TRUE
+set GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID
+set GOOGLE_CLOUD_LOCATION=us-central1
+set DEMO_AGENT_MODEL=gemini-2.5-flash
+uv run adk deploy agent_engine \
+  --project=YOUR_PROJECT_ID \
+  --region=us-central1 \
+  --display_name="studio-google-search-agent" \
+  --staging_bucket=gs://YOUR_PROJECT_ID-agent-engine \
+  --requirements_file=requirements-agent-engine.txt \
+  app/google_search_agent
+```
+
+### Notes
+
+- There is currently no documented first-party `gcloud ... deploy agent-engine` flow for ADK source deployment comparable to `adk deploy agent_engine`; `gcloud` is used for setup and inspection.
+- After deployment, the resulting resource is a Vertex AI Reasoning Engine / Agent Engine resource.
+- You can inspect deployed resources with `gcloud ai reasoning-engines list --project=YOUR_PROJECT_ID --region=us-central1` if that surface is available in your installed SDK, or use the Vertex AI console.
+
 ## Running the Demo
 
 ### Start the Server

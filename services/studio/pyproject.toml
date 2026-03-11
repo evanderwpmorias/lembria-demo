@@ -38,9 +38,6 @@ ignore = ["C901", "PLR0915"]
 [tool.ruff.lint.isort]
 known-first-party = ["app", "bidi_demo"]
 
-[tool.uv]
-dev-dependencies = []
-
 [tool.hatch.build.targets.wheel]
 packages = ["app"]
 

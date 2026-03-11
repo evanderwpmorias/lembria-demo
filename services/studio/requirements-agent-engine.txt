@@ -1,0 +1,4 @@
+google-cloud-aiplatform[agent_engines,adk]>=1.112.0
+google-adk>=1.20.0
+google-cloud-storage>=3.0.0
+opentelemetry-instrumentation-google-genai>=0.1b0

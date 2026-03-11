@@ -122,9 +122,6 @@ requires-dist = [
 ]
 provides-extras = ["dev"]
 
-[package.metadata.requires-dev]
-dev = []
-
 [[package]]
 name = "certifi"
 version = "2026.1.4"
