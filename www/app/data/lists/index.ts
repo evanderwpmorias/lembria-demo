@@ -1,0 +1,8 @@
+export { familiesList as familiesListConfig } from './familiesList'
+export { messagesList as messagesListConfig } from './messagesList'
+export { sessionsList as sessionsListConfig } from './sessionsList'
+export { memoriesList as memoriesListConfig } from './memoriesList'
+export { usersList as usersListConfig } from './usersList'
+export { storiesList as storiesListConfig } from './storiesList'
+export { personsList as personsListConfig } from './personsList'
+export { familiesList as familiesListConfig } from './familiesList'

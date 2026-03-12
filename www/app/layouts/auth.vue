@@ -1,19 +1,13 @@
-<script lang="ts">
-export default {
-  name: "auth"
-};
-</script>
 <script setup lang="ts">
-
+// app authentication pages
+definePageMeta({
+  layout: false // This is a layout component
+});
 </script>
 
 <template>
-  <div id=""  class="layout-auth ">
-  <div class="min-h-screen flex items-center justify-center bg-gray-50">
-    <div class="w-full max-w-lg bg-white shadow rounded p-8 min-h-[300px]" action="">
-      <slot class="text-2xl mb-4"></slot>
-    </div>
-  </div>
+  <div id="undefined"  class="layout-auth ">
+    <div><!-- Empty layout --></div>
   </div>
 </template>
 
