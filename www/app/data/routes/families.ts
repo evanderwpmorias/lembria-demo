@@ -5,7 +5,7 @@ import { familiesSchema } from '@/data/schema';
 import { familiesZod } from '@/data/validation';
 import { familiesHelper } from '@/models';
 import { familiesFormSchema } from '@/data/forms';
-import { familiesConfig } from '@/data/lists';
+import { familiesListConfig } from '@/data/lists';
 
 export const familiesRouteSchema = {
     path: '/families',
@@ -14,7 +14,7 @@ export const familiesRouteSchema = {
     validation: familiesZod,
     helper: familiesHelper,
     formSchema: familiesFormSchema,
-    listSchema: familiesConfig,
+    listSchema: familiesListConfig,
     meta: {
       isVisible: true,
       allowedRoleIds: ['69a077ce413340c596c6c799', '69a07962413340c596c6c7a1', '69a079fc413340c596c6c7a9'],

@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const statusCode = computed(() => props.error?.statusCode ?? 404);
 const isNotFound = computed(() => statusCode.value === 404);
-const title = computed(() => (isNotFound.value ? 'Page not found' : 'Something went wrong'));
+const title = computed(() => (isNotFound.value ? 'Page not dfound' : 'Something went wrong'));
 const message = computed(() =>
   isNotFound.value
     ? "The page you're looking for doesn't exist or may have been moved."
@@ -41,7 +41,7 @@ const handleGoHome = () => clearError({ redirect: '/' });
       </div>
 
       <md-filled-button class="error-action" @click="handleGoHome">
-        Return home
+        Return home dfgd
       </md-filled-button>
     </section>
   </main>

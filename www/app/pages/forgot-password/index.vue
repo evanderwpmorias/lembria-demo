@@ -98,7 +98,6 @@ definePageMeta({
         autocomplete="email"
         :value="email"
         :error="hasError"
-        :error-text="activeError"
         @input="email = ($event.target as HTMLInputElement).value"
       />
 

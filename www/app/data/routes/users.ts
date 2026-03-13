@@ -5,7 +5,7 @@ import { usersSchema } from '@/data/schema';
 import { usersZod } from '@/data/validation';
 import { usersHelper } from '@/models';
 import { usersFormSchema } from '@/data/forms';
-import { usersConfig } from '@/data/lists';
+import { usersListConfig } from '@/data/lists';
 
 export const usersRouteSchema = {
     path: '/users',
@@ -14,7 +14,7 @@ export const usersRouteSchema = {
     validation: usersZod,
     helper: usersHelper,
     formSchema: usersFormSchema,
-    listSchema: usersConfig,
+    listSchema: usersListConfig,
     meta: {
       isVisible: true,
       allowedRoleIds: ['69a077ce413340c596c6c799', '69a07962413340c596c6c7a1', '69a079fc413340c596c6c7a9'],

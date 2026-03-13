@@ -1,20 +1,20 @@
+<script lang="ts">
+export default {
+  name: "defaut"
+};
+</script>
 <script setup lang="ts">
-// Main app layout
-definePageMeta({
-  layout: false // This is a layout component
-});
+
 </script>
 
 <template>
-  <div id="undefined"  class="layout-defaut ">
-    <div><!-- Empty layout --></div>
+  <div id="" class="layout-default min-h-screen ">
+    <CustomMainHeader />
+      <main class="min-h-screen  px-3 md:px-6 flex flex-col">
+        <div class="flex-1">
+          <slot class="flex-1"></slot>
+        </div>
+      </main>
+    <CustomFooter />
   </div>
 </template>
-
-<style scoped>
-/* Add any layout-specific styles here */
-.layout-defaut {
-  /* Layout styles */
-  
-}
-</style>

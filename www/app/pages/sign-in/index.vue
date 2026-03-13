@@ -100,7 +100,6 @@ definePageMeta({
         autocomplete="email"
         :value="email"
         :error="hasError"
-        :error-text="activeError"
         @input="email = ($event.target as HTMLInputElement).value"
       />
 
@@ -111,7 +110,6 @@ definePageMeta({
         autocomplete="current-password"
         :value="password"
         :error="hasError"
-        :error-text="activeError"
         @input="password = ($event.target as HTMLInputElement).value"
       />
 

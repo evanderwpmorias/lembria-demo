@@ -5,7 +5,7 @@ import { messagesSchema } from '@/data/schema';
 import { messagesZod } from '@/data/validation';
 import { messagesHelper } from '@/models';
 import { messagesFormSchema } from '@/data/forms';
-import { messagesConfig } from '@/data/lists';
+import { messagesListConfig } from '@/data/lists';
 
 export const messagesRouteSchema = {
     path: '/messages',
@@ -14,7 +14,7 @@ export const messagesRouteSchema = {
     validation: messagesZod,
     helper: messagesHelper,
     formSchema: messagesFormSchema,
-    listSchema: messagesConfig,
+    listSchema: messagesListConfig,
     meta: {
       isVisible: true,
       allowedRoleIds: ['69a077ce413340c596c6c799', '69a07962413340c596c6c7a1', '69a079fc413340c596c6c7a9'],

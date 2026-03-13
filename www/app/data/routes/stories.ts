@@ -5,7 +5,7 @@ import { storiesSchema } from '@/data/schema';
 import { storiesZod } from '@/data/validation';
 import { storiesHelper } from '@/models';
 import { storiesFormSchema } from '@/data/forms';
-import { storiesConfig } from '@/data/lists';
+import { storiesListConfig } from '@/data/lists';
 
 export const storiesRouteSchema = {
     path: '/stories',
@@ -14,7 +14,7 @@ export const storiesRouteSchema = {
     validation: storiesZod,
     helper: storiesHelper,
     formSchema: storiesFormSchema,
-    listSchema: storiesConfig,
+    listSchema: storiesListConfig,
     meta: {
       isVisible: true,
       allowedRoleIds: ['69a077ce413340c596c6c799', '69a07962413340c596c6c7a1', '69a079fc413340c596c6c7a9'],

@@ -25,6 +25,7 @@ const storeError = computed(() => userStore.error);
 const activeError = computed(() => formError.value || storeError.value || '');
 const hasError = computed(() => Boolean(activeError.value));
 const redirectPath = firebaseSettings.redirectPath || '/';
+const googleIcon = computed(() => (loading.value ? '/logo_google_gray.svg' : '/logo_google.svg'));
 const fieldClass = [
   'w-full',
   '[--md-outlined-text-field-container-shape:1rem]',
@@ -59,6 +60,13 @@ const handleSubmit = async () => {
   }
 
   await userStore.registerUser(email.value, password.value);
+  await router.push(redirectPath);
+};
+
+const handleGoogle = async () => {
+  formError.value = null;
+
+  await userStore.loginWithGoogle();
   await router.push(redirectPath);
 };
 
@@ -102,7 +110,6 @@ definePageMeta({
         autocomplete="email"
         :value="email"
         :error="hasError"
-        :error-text="activeError"
         @input="email = ($event.target as HTMLInputElement).value"
       />
 
@@ -113,7 +120,6 @@ definePageMeta({
         autocomplete="new-password"
         :value="password"
         :error="hasError"
-        :error-text="activeError"
         @input="password = ($event.target as HTMLInputElement).value"
       />
 
@@ -127,6 +133,20 @@ definePageMeta({
           <span>{{ loading ? 'Creating Account' : 'Create Account' }}</span>
         </span>
       </md-filled-button>
+
+      <button
+        type="button"
+        :disabled="loading"
+        class="inline-flex min-h-14 w-full items-center justify-center rounded-full border border-outline bg-secondary-100 px-1 text-neutral-10 transition-[border-color,box-shadow,background-color,color] duration-200 ease-in-out hover:border-[#d3e3fd] hover:bg-[#f8fbff] hover:shadow-[0_1px_2px_rgba(66,133,244,0.15)] active:border-[#d3e3fd] active:bg-secondary-95 active:shadow-none focus-visible:border-[#a8c7fa] focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[#d3e3fd] disabled:border-transparent disabled:bg-secondary-95 disabled:text-neutral-50 disabled:shadow-none"
+        @click="handleGoogle"
+      >
+        <span class="inline-flex w-full items-center justify-center gap-3 px-6">
+          <img class="h-4.5 w-4.5 shrink-0" :src="googleIcon" alt="" aria-hidden="true" />
+          <span class="font-[Roboto] text-base leading-tight font-medium tracking-normal sm:text-xl">
+            Sign up with Google
+          </span>
+        </span>
+      </button>
     </form>
 
     <div class="text-center">

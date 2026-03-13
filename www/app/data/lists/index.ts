@@ -1,4 +1,3 @@
-export { familiesList as familiesListConfig } from './familiesList'
 export { messagesList as messagesListConfig } from './messagesList'
 export { sessionsList as sessionsListConfig } from './sessionsList'
 export { memoriesList as memoriesListConfig } from './memoriesList'

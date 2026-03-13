@@ -5,7 +5,7 @@ import { personsSchema } from '@/data/schema';
 import { personsZod } from '@/data/validation';
 import { personsHelper } from '@/models';
 import { personsFormSchema } from '@/data/forms';
-import { personsConfig } from '@/data/lists';
+import { personsListConfig } from '@/data/lists';
 
 export const personsRouteSchema = {
     path: '/persons',
@@ -14,7 +14,7 @@ export const personsRouteSchema = {
     validation: personsZod,
     helper: personsHelper,
     formSchema: personsFormSchema,
-    listSchema: personsConfig,
+    listSchema: personsListConfig,
     meta: {
       isVisible: true,
       allowedRoleIds: ['69a077ce413340c596c6c799', '69a07962413340c596c6c7a1', '69a079fc413340c596c6c7a9'],

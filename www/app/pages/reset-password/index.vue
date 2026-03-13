@@ -104,7 +104,6 @@ definePageMeta({
         autocomplete="new-password"
         :value="newPassword"
         :error="hasError"
-        :error-text="activeError"
         @input="newPassword = ($event.target as HTMLInputElement).value"
       />
 
@@ -115,7 +114,6 @@ definePageMeta({
         autocomplete="new-password"
         :value="confirmPassword"
         :error="hasError"
-        :error-text="activeError"
         @input="confirmPassword = ($event.target as HTMLInputElement).value"
       />
 

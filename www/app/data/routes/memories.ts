@@ -5,7 +5,7 @@ import { memoriesSchema } from '@/data/schema';
 import { memoriesZod } from '@/data/validation';
 import { memoriesHelper } from '@/models';
 import { memoriesFormSchema } from '@/data/forms';
-import { memoriesConfig } from '@/data/lists';
+import { memoriesListConfig } from '@/data/lists';
 
 export const memoriesRouteSchema = {
     path: '/memories',
@@ -14,7 +14,7 @@ export const memoriesRouteSchema = {
     validation: memoriesZod,
     helper: memoriesHelper,
     formSchema: memoriesFormSchema,
-    listSchema: memoriesConfig,
+    listSchema: memoriesListConfig,
     meta: {
       isVisible: true,
       allowedRoleIds: ['69a077ce413340c596c6c799', '69a07962413340c596c6c7a1', '69a079fc413340c596c6c7a9'],
