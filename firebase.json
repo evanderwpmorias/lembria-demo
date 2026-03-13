@@ -21,21 +21,6 @@
         "npm --prefix \"$RESOURCE_DIR\" run build"
       ],
       "source": "functions"
-    },
-    {
-      "source": "demo",
-      "codebase": "demo",
-      "disallowLegacyRuntimeConfig": true,
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
-      ],
-      "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run build"
-      ]
     }
   ],
   "apphosting": [
@@ -86,7 +71,7 @@
       "port": 5001
     },
     "firestore": {
-      "port": 8080
+      "port": 8082
     },
     "hosting": {
       "port": 5000

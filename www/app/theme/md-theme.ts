@@ -342,6 +342,47 @@ export const navDrawerItem = `flex items-center gap-3 mx-3 px-4 min-h-[56px] rou
 
 export const navDrawerHeadline = `flex items-center h-[56px] px-7 ${typeTitleSmall} text-on-surface-variant`;
 
+/**
+ * Navigation Drawer — Modal variant (mobile overlay)
+ * Fixed-width drawer that slides in from the leading edge on small screens.
+ * Prefer over navDrawer when the drawer is absolutely/fixedly positioned.
+ * @see https://m3.material.io/components/navigation-drawer/specs
+ */
+export const navDrawerModal = `flex flex-col w-72 max-w-[90vw] h-full py-2 bg-surface-container-low rounded-e-[28px] shadow-xl dark:bg-surface-container-low ${transitionBase}`;
+
+/* -------------------------------------------------------------------------- */
+/*                               Top App Bar                                  */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Small Top App Bar — 64dp (h-16)
+ * Primary sticky navigation container. Holds a leading icon/logo, optional centred
+ * destinations, and trailing action icons. Rendered at the top of every page.
+ * @see https://m3.material.io/components/top-app-bar/specs
+ *
+ * Structure:
+ * header.topAppBar
+ *   button.iconBtnStandard     — leading hamburger / navigation icon (mobile)
+ *   a / NuxtLink               — logo / brand mark
+ *   nav                        — centred destinations (desktop only, optional)
+ *   div.topAppBarTrailing      — trailing action icon buttons
+ */
+export const topAppBar = `sticky top-0 z-40 flex items-center justify-between h-16 px-4 bg-surface/80 backdrop-blur-md border-b border-outline-variant/40 ${transitionBase}`;
+
+export const topAppBarTrailing = `flex items-center gap-2 shrink-0`;
+
+/**
+ * Top Navigation Destination Link — pill indicator (MD3-aligned)
+ * Page-level navigation links rendered inside a top app bar on wider viewports.
+ * The active fill uses secondary-container (MD3 pill indicator pattern), consistent
+ * with Navigation Bar and Navigation Rail destination styles.
+ *
+ * Usage: apply topNavItemActive when the link is active, topNavItemInactive otherwise.
+ */
+export const topNavItem         = `flex items-center gap-2 h-9 px-4 rounded-full ${typeLabelLarge} cursor-pointer ${transitionBase}`;
+export const topNavItemActive   = `${topNavItem} bg-secondary-container text-on-secondary-container`;
+export const topNavItemInactive = `${topNavItem} text-on-surface-variant hover:bg-on-surface-variant/8 hover:text-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`;
+
 /* -------------------------------------------------------------------------- */
 /*                                  Selection                                 */
 /* -------------------------------------------------------------------------- */

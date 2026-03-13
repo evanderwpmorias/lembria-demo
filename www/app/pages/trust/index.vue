@@ -24,7 +24,7 @@
             <article
               v-for="principle in principles"
               :key="principle.title"
-              class="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 shadow-lg shadow-black/10"
+              class="rounded-4xl border border-white/10 bg-white/3 p-8 shadow-lg shadow-black/10"
             >
               <h3 class="text-xl font-semibold text-white">{{ principle.title }}</h3>
               <p class="mt-4 text-base leading-7 text-stone-300">{{ principle.description }}</p>
@@ -44,7 +44,7 @@
             <div
               v-for="commitment in commitments"
               :key="commitment.title"
-              class="rounded-[2rem] border border-white/10 bg-white/[0.03] p-7"
+              class="rounded-4xl border border-white/10 bg-white/3 p-7"
             >
               <h3 class="text-lg font-semibold text-white">{{ commitment.title }}</h3>
               <p class="mt-3 text-base leading-7 text-stone-300">{{ commitment.description }}</p>
@@ -66,19 +66,19 @@
               <div class="mt-8 flex flex-wrap gap-4">
                 <NuxtLink
                   to="/privacy"
-                  class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-base font-semibold text-stone-100 transition hover:border-white/20 hover:bg-white/[0.06]"
+                  class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/3 px-6 py-3 text-base font-semibold text-stone-100 transition hover:border-white/20 hover:bg-white/6"
                 >
                   Privacy Policy
                 </NuxtLink>
                 <NuxtLink
                   to="/terms"
-                  class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-base font-semibold text-stone-100 transition hover:border-white/20 hover:bg-white/[0.06]"
+                  class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/3 px-6 py-3 text-base font-semibold text-stone-100 transition hover:border-white/20 hover:bg-white/6"
                 >
                   Terms of Service
                 </NuxtLink>
               </div>
             </div>
-            <div class="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8">
+            <div class="rounded-4xl border border-white/10 bg-white/3 p-8">
               <h3 class="text-xl font-semibold text-white">Contact our privacy team</h3>
               <p class="mt-4 text-base leading-7 text-stone-300">
                 For privacy-related inquiries or data requests, please contact us at:

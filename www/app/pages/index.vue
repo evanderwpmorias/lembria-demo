@@ -13,7 +13,6 @@ definePageMeta({
     <!-- ===== HERO ===== -->
     <header class="relative overflow-hidden pt-16 pb-24 px-4 md:px-8 bg-surface">
       <!-- decorative blobs -->
-      <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-container rounded-full blur-3xl opacity-40 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
       <div class="absolute bottom-0 left-0 w-80 h-80 bg-surface-variant rounded-full blur-3xl opacity-60 -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
 
       <div class="max-w-7xl mx-auto relative z-10">
@@ -47,27 +46,27 @@ definePageMeta({
             </div>
 
             <!-- Social proof -->
-            <div class="flex items-center gap-3 pt-2">
+            <!-- <div class="flex items-center gap-3 pt-2">
               <div class="flex -space-x-2">
                 <div class="w-8 h-8 rounded-full bg-primary-30 border-2 border-surface flex items-center justify-center text-white text-xs font-bold">M</div>
                 <div class="w-8 h-8 rounded-full bg-tertiary-30 border-2 border-surface flex items-center justify-center text-white text-xs font-bold">S</div>
                 <div class="w-8 h-8 rounded-full bg-secondary-40 border-2 border-surface flex items-center justify-center text-white text-xs font-bold">J</div>
               </div>
               <p class="text-sm text-on-surface-variant">Trusted by <strong class="text-on-surface">2,400+ families</strong> preserving their legacy</p>
-            </div>
+            </div> -->
           </div>
 
           <!-- Right visual -->
           <div class="flex-1 max-w-lg lg:max-w-none mx-auto lg:mx-0">
             <div class="relative group">
-              <div class="absolute -inset-1 bg-gradient-to-br from-primary to-tertiary rounded-3xl blur opacity-20 group-hover:opacity-35 transition duration-700"></div>
-              <div class="relative bg-surface-container-low rounded-3xl overflow-hidden shadow-xl border border-outline-variant">
+              <!-- <div class="absolute -inset-1 bg-gradient-to-br from-primary to-tertiary rounded-3xl blur opacity-20 group-hover:opacity-35 transition duration-700"></div> -->
+              <div class="relative bg-surface-container-low rounded-3xl overflow-hidden  border border-outline-variant">
                 <img
-                  class="w-full aspect-[4/3] object-cover"
+                  class="w-full aspect-4/3 object-cover"
                   src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80"
                   alt="Family gathering, generations together"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex items-end p-7">
+                <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent flex items-end p-7">
                   <div class="flex items-center gap-4 text-white">
                     <span class="material-symbols-outlined text-4xl opacity-90">auto_stories</span>
                     <div>
@@ -99,7 +98,7 @@ definePageMeta({
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Card 1 -->
-            <div class="card card-elevated bg-surface group hover:shadow-md transition-shadow cursor-default border border-outline-variant hover:border-primary/30">
+            <div class="card card-elevated bg-surface group  transition-shadow cursor-default border border-outline-variant hover:border-primary/30">
               <div class="w-14 h-14 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center mb-6 transition-colors group-hover:bg-primary group-hover:text-on-primary">
                 <span class="material-symbols-outlined text-3xl">photo_library</span>
               </div>
@@ -149,7 +148,7 @@ definePageMeta({
           </div>
 
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow">
+            <div class="group relative aspect-3/4 rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow">
               <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10"></div>
               <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" alt="Migration journey" />
@@ -160,7 +159,7 @@ definePageMeta({
               </div>
             </div>
 
-            <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow">
+            <div class="group relative aspect-3/4 rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow">
               <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10"></div>
               <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 src="https://images.unsplash.com/photo-1516589091380-5d8e87df6999?w=600&q=80" alt="Love stories" />
@@ -171,7 +170,7 @@ definePageMeta({
               </div>
             </div>
 
-            <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow">
+            <div class="group relative aspect-3/4 rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow">
               <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10"></div>
               <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80" alt="Family traditions" />
@@ -182,7 +181,7 @@ definePageMeta({
               </div>
             </div>
 
-            <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow">
+            <div class="group relative aspect-3/4 rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow">
               <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10"></div>
               <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&q=80" alt="Childhood memories" />
@@ -242,8 +241,8 @@ definePageMeta({
         <div class="max-w-7xl mx-auto">
           <div class="flex flex-col lg:flex-row gap-12 items-center">
             <!-- Icon side -->
-            <div class="flex-shrink-0">
-              <div class="w-32 h-32 rounded-[2rem] bg-primary-container flex items-center justify-center shadow-lg">
+            <div class="shrink-0">
+              <div class="w-32 h-32 rounded-4xl bg-primary-container flex items-center justify-center shadow-lg">
                 <span class="material-symbols-outlined text-6xl text-on-primary-container">lock</span>
               </div>
             </div>

@@ -1,149 +1,19 @@
-<template>
-  <div>
-    <!-- ================================================================
-         DESKTOP (md+): Top Navigation Bar — Material Design 3 style
-         ================================================================ -->
-    <header class="flex sticky top-0 z-40 items-center justify-between h-16 px-6 lg:px-8 border-b border-white/10 bg-stone-950/10 backdrop-blur">
-     <button
-        type="button"
-        class="flex md:hidden items-center justify-center w-10 h-10 rounded-full text-on-surface-variant transition-colors duration-200 hover:bg-on-surface-variant/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        :aria-expanded="drawerOpen"
-        aria-controls="mobile-drawer"
-        aria-label="Toggle navigation menu"
-        @click="drawerOpen = !drawerOpen"
-      >
-        <span class="material-symbols-outlined select-none text-2xl">
-          {{ drawerOpen ? 'close' : 'menu' }}
-        </span>
-      </button>
-      <!-- Logo -->
-      <NuxtLink to="/" class="flex items-center gap-3 shrink-0">
-        <img src="/logo_name.svg" alt="Lembria" class="h-7 object-contain" />
-    
-      </NuxtLink>
-
-      <!-- Center destinations — MD3 Navigation Bar style with indicator pills -->
-      <nav class="hidden md:flex items-center gap-1" role="navigation" aria-label="Main navigation">
-        <NuxtLink
-          v-for="item in navItems"
-          :key="item.to"
-          :to="item.to"
-          class="group flex items-center gap-2 h-9 px-4 rounded-full transition-all duration-200 ease-in-out cursor-pointer"
-          :class="isActive(item.to)
-            ? 'bg-secondary-container text-on-secondary-container'
-            : 'text-on-surface-variant hover:bg-on-surface-variant/8 hover:text-on-surface'"
-          :aria-current="isActive(item.to) ? 'page' : undefined"
-        >
-          <span class="material-symbols-outlined select-none" style="font-size:1.25rem;line-height:1">{{ item.icon }}</span>
-          <span class="text-[13px] font-medium tracking-wide">{{ item.label }}</span>
-        </NuxtLink>
-      </nav>
-
-      <!-- Actions -->
-      <div class="flex items-center gap-2 shrink-0">
-        <NuxtLink
-          to="/sign-in"
-          class="hidden lg:inline-flex items-center gap-1.5 h-9 px-4 rounded-full border border-outline text-primary text-sm font-medium transition-all duration-200 hover:bg-primary/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        >
-          <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">login</span>
-          Sign In
-        </NuxtLink>
-        <NuxtLink
-          to="/sign-up"
-          class="inline-flex items-center gap-1.5 h-9 px-5 rounded-full bg-primary text-on-primary text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary/92 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        >
-          <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
-          <span class="hidden lg:inline">Get Started</span>
-        </NuxtLink>
-      </div>
-    </header>
-
-    <!-- ================================================================
-         MOBILE: Navigation Drawer (MD3 modal drawer) — slides in from left
-         ================================================================ -->
-    <!-- Scrim -->
-    <Transition name="scrim">
-      <div
-        v-if="drawerOpen"
-        class="md:hidden fixed inset-0 z-50 bg-scrim/40"
-        aria-hidden="true"
-        @click="drawerOpen = false"
-      />
-    </Transition>
-
-    <!-- Drawer panel -->
-    <Transition name="drawer">
-      <nav
-        v-if="drawerOpen"
-        id="mobile-drawer"
-        class="md:hidden fixed left-0 top-0 bottom-0 z-50 flex flex-col w-72 bg-surface-container-low rounded-r-[1.75rem] shadow-xl overflow-y-auto"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        <!-- Drawer header -->
-        <div class="flex items-center justify-between h-14 px-4 border-b border-outline-variant/50">
-          <NuxtLink to="/" class="flex items-center gap-2" @click="drawerOpen = false">
-            <img src="/logo_name.svg" alt="Lembria" class="h-7 object-contain" />
-          </NuxtLink>
-          <button
-            type="button"
-            class="flex items-center justify-center w-10 h-10 rounded-full text-on-surface-variant transition-colors duration-200 hover:bg-on-surface-variant/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label="Close navigation menu"
-            @click="drawerOpen = false"
-          >
-            <span class="material-symbols-outlined select-none text-2xl">close</span>
-          </button>
-        </div>
-
-        <!-- Destination items -->
-        <div class="flex flex-col gap-0.5 px-3 pt-3">
-          <NuxtLink
-            v-for="item in navItems"
-            :key="item.to"
-            :to="item.to"
-            class="group flex items-center gap-3 h-14 px-4 rounded-full transition-all duration-200"
-            :class="isActive(item.to)
-              ? 'bg-secondary-container text-on-secondary-container'
-              : 'text-on-surface-variant hover:bg-on-surface-variant/8 hover:text-on-surface'"
-            :aria-current="isActive(item.to) ? 'page' : undefined"
-            @click="drawerOpen = false"
-          >
-            <span class="material-symbols-outlined select-none shrink-0" style="font-size:1.375rem;line-height:1">{{ item.icon }}</span>
-            <span class="text-sm font-medium tracking-wide">{{ item.label }}</span>
-          </NuxtLink>
-        </div>
-
-        <!-- Divider -->
-        <div class="mx-4 my-3 h-px bg-outline-variant/50" aria-hidden="true" />
-
-        <!-- Auth actions -->
-        <div class="flex flex-col gap-2 px-4">
-          <NuxtLink
-            to="/sign-in"
-            class="flex items-center gap-3 h-14 px-4 rounded-full text-on-surface-variant hover:bg-on-surface-variant/8 hover:text-on-surface transition-all duration-200"
-            :class="isActive('/sign-in') ? 'bg-secondary-container text-on-secondary-container' : ''"
-            @click="drawerOpen = false"
-          >
-            <span class="material-symbols-outlined select-none shrink-0" style="font-size:1.375rem;line-height:1">login</span>
-            <span class="text-sm font-medium tracking-wide">Sign In</span>
-          </NuxtLink>
-          <NuxtLink
-            to="/sign-up"
-            class="flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-primary text-on-primary text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary/92 hover:shadow-md"
-            @click="drawerOpen = false"
-          >
-            <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
-            Get Started
-          </NuxtLink>
-        </div>
-      </nav>
-    </Transition>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRoute } from '#vue-router'
+import {
+  topAppBar,
+  topAppBarTrailing,
+  topNavItemActive,
+  topNavItemInactive,
+  iconBtnStandard,
+  btnOutlined,
+  btnFilled,
+  navDrawerModal,
+  navDrawerItem,
+  dividerHorizontal,
+  scrim,
+} from '@/theme/md-theme'
 
 const route = useRoute()
 const drawerOpen = ref(false)
@@ -163,6 +33,146 @@ const isActive = (path: string): boolean => {
   return route.path.startsWith(path)
 }
 </script>
+
+<template>
+  <!-- ================================================================
+       Top App Bar — MD3 Small Top App Bar (64dp)
+       ================================================================ -->
+  <header :class="topAppBar" class="text-base">
+    <!-- Leading: hamburger toggle (mobile only) -->
+    <button
+      type="button"
+      :class="[iconBtnStandard, 'md:hidden']"
+      :aria-expanded="drawerOpen"
+      aria-controls="mobile-drawer"
+      aria-label="Toggle navigation menu"
+      @click="drawerOpen = !drawerOpen"
+    >
+      <span class="material-symbols-outlined select-none text-2xl">
+        {{ drawerOpen ? 'close' : 'menu' }}
+      </span>
+    </button>
+
+    <!-- Logo / brand -->
+    <NuxtLink to="/" class="flex items-center gap-3 shrink-0">
+      <img src="/logo_name.svg" alt="Lembria" class="h-7 object-contain" />
+    </NuxtLink>
+
+    <!-- Centre destinations — pill indicator nav (desktop only) -->
+    <nav class="hidden md:flex items-center gap-1" role="navigation" aria-label="Main navigation">
+      <NuxtLink
+        v-for="item in navItems"
+        :key="item.to"
+        :to="item.to"
+        :class="isActive(item.to) ? topNavItemActive : topNavItemInactive"
+        :aria-current="isActive(item.to) ? 'page' : undefined"
+      >
+        <span class="material-symbols-outlined select-none" style="font-size:1.25rem;line-height:1">{{ item.icon }}</span>
+        <b>{{ item.label }}</b>
+      </NuxtLink>
+    </nav>
+
+    <!-- Trailing actions -->
+    <div :class="topAppBarTrailing">
+      <!-- Sign In — desktop only -->
+      <div class="hidden lg:flex">
+        <NuxtLink to="/sign-in" :class="btnOutlined">
+          <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">login</span>
+          Sign In
+        </NuxtLink>
+      </div>
+      <!-- Get Started — always visible -->
+      <NuxtLink to="/sign-up" :class="btnFilled">
+        <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
+        <span class="hidden lg:inline">Get Started</span>
+      </NuxtLink>
+    </div>
+  </header>
+
+  <!-- ================================================================
+       Mobile Navigation Drawer — MD3 modal drawer
+       ================================================================ -->
+  <!-- Scrim / overlay -->
+  <Transition name="scrim">
+    <div
+      v-if="drawerOpen"
+      class="md:hidden fixed inset-0 z-50"
+      :class="scrim"
+      aria-hidden="true"
+      @click="drawerOpen = false"
+    />
+  </Transition>
+
+  <!-- Drawer panel -->
+  <Transition name="drawer">
+    <nav
+      v-if="drawerOpen"
+      id="mobile-drawer"
+      class="md:hidden fixed left-0 top-0 bottom-0 z-50 overflow-y-auto"
+      :class="navDrawerModal"
+      role="navigation"
+      aria-label="Main navigation"
+    >
+      <!-- Drawer header: logo + close -->
+      <div class="flex items-center justify-between h-14 px-4 border-b border-outline-variant/50">
+        <NuxtLink to="/" class="flex items-center gap-2" @click="drawerOpen = false">
+          <img src="/logo_name.svg" alt="Lembria" class="h-7 object-contain" />
+        </NuxtLink>
+        <button
+          type="button"
+          :class="iconBtnStandard"
+          aria-label="Close navigation menu"
+          @click="drawerOpen = false"
+        >
+          <span class="material-symbols-outlined select-none text-2xl">close</span>
+        </button>
+      </div>
+
+      <!-- Destination items -->
+      <div class="flex flex-col gap-0.5 pt-3">
+        <NuxtLink
+          v-for="item in navItems"
+          :key="item.to"
+          :to="item.to"
+          :class="navDrawerItem"
+          :aria-current="isActive(item.to) ? 'page' : undefined"
+          :aria-selected="isActive(item.to) ? 'true' : undefined"
+          @click="drawerOpen = false"
+        >
+          <span class="material-symbols-outlined select-none shrink-0" style="font-size:1.375rem;line-height:1">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+        </NuxtLink>
+      </div>
+
+      <!-- Divider -->
+      <div class="my-3" :class="dividerHorizontal" aria-hidden="true" />
+
+      <!-- Auth actions -->
+      <div class="flex flex-col gap-2">
+        <NuxtLink
+          to="/sign-in"
+          :class="navDrawerItem"
+          :aria-selected="isActive('/sign-in') ? 'true' : undefined"
+          @click="drawerOpen = false"
+        >
+          <span class="material-symbols-outlined select-none shrink-0" style="font-size:1.375rem;line-height:1">login</span>
+          <span>Sign In</span>
+        </NuxtLink>
+        <div class="mx-3 mt-1">
+          <NuxtLink
+            to="/sign-up"
+            :class="[btnFilled, 'w-full']"
+            @click="drawerOpen = false"
+          >
+            <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
+            Get Started
+          </NuxtLink>
+        </div>
+      </div>
+    </nav>
+  </Transition>
+</template>
+
 
 <style>
 .scrim-enter-active,

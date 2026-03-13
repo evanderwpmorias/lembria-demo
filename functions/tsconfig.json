@@ -12,7 +12,6 @@
     "target": "es2017",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "moduleRes/srcolution": "nodenext",
     "noUnusedLocals": true
   }
 }

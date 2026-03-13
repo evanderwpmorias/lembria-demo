@@ -6,9 +6,23 @@ export type FlowActionHandlerParams = {
 	flowMeta?: Record<string, any>;
 };
 
-export const ${action.name} = async (params: FlowActionHandlerParams = {}, model?: any) => {
+const isPlainObject = (value: unknown): value is Record<string, any> => {
+	return typeof value === 'object' && value !== null && !Array.isArray(value);
+};
+
+export const mongooseCreateAction = async (params: FlowActionHandlerParams = {}, model?: any) => {
   try {
-    const doc = new model(params.input?.data);
+    if (!model) {
+      return false;
+    }
+
+    const inputData = isPlainObject(params.input?.data)
+      ? params.input.data
+      : isPlainObject(params.input)
+        ? params.input
+        : {};
+
+    const doc = new model(inputData);
     await doc.save();
     return doc.toJSON();
   } catch (error: any) {

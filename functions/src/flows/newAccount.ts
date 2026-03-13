@@ -1,8 +1,20 @@
 import { mongooseFindManyAction } from './actions/mongooseFindMany';
 import { mongooseCreateAction } from './actions/mongooseCreate';
 import { newAccountData } from './data/newAccount';
-import { HttpsError } from 'firebase-functions/v2/identity';
-import { mongoose } from 'mongoose';
+import mongoose from 'mongoose';
+import * as mongoModels from '../mongoSchema';
+
+type PlainObject = Record<string, any>;
+
+const isPlainObject = (value: unknown): value is PlainObject => {
+	return typeof value === 'object' && value !== null && !Array.isArray(value);
+};
+
+const removeEmptyValues = (obj: PlainObject = {}) => {
+	return Object.fromEntries(
+		Object.entries(obj).filter(([, value]) => value !== '' && value !== undefined && value !== null)
+	);
+};
 
 const toStepKey = (value: any, fallback: string = 'step') => {
 	const normalized = String(value || fallback)
@@ -18,7 +30,79 @@ const resolveTemplateKey = (moduleRef?: any): string => {
 	return moduleRef?.key || '';
 };
 
-const actionHandlers: Record<string, (params?: any) => Promise<any>> = {
+const getStepInputMap = (stepMeta: unknown): Record<string, any> => {
+	if (!stepMeta || typeof stepMeta !== 'object') return {};
+	const inputMap = (stepMeta as { inputMap?: unknown }).inputMap;
+	if (!inputMap || typeof inputMap !== 'object' || Array.isArray(inputMap)) return {};
+	return inputMap as Record<string, any>;
+};
+
+const normalizeAuthPayload = (payload?: any): PlainObject => {
+	const source = isPlainObject(payload?.data)
+		? payload.data
+		: isPlainObject(payload?.user)
+			? payload.user
+			: isPlainObject(payload)
+				? payload
+				: {};
+
+	return removeEmptyValues({
+		uid: source.uid,
+		email: source.email,
+		displayName: source.displayName,
+		photoURL: source.photoURL,
+		phoneNumber: source.phoneNumber,
+		emailVerified: source.emailVerified,
+		disabled: source.disabled,
+	});
+};
+
+const getCreateUserPayload = (context: PlainObject) => {
+	return removeEmptyValues({
+		uid: context.uid,
+		email: context.email,
+		displayName: context.displayName,
+		photoURL: context.photoURL,
+		phoneNumber: context.phoneNumber,
+		emailVerified: context.emailVerified,
+		disabled: context.disabled,
+	});
+};
+
+const buildStepInput = (stepMeta: any, actionKey: string, context: PlainObject): PlainObject => {
+	const configuredInputs = isPlainObject(stepMeta?.inputs)
+		? removeEmptyValues(stepMeta.inputs)
+		: {};
+	const mappedInputs = getStepInputMap(stepMeta);
+
+	if (actionKey === 'mongoose.findMany') {
+		return {
+			...context,
+			...configuredInputs,
+			...mappedInputs,
+			inputData: removeEmptyValues({ uid: context.uid, email: context.email }),
+		};
+	}
+
+	if (actionKey === 'mongoose.create') {
+		return {
+			...context,
+			...configuredInputs,
+			...mappedInputs,
+			data: getCreateUserPayload(context),
+		};
+	}
+
+	return { ...context, ...configuredInputs, ...mappedInputs };
+};
+
+const resolveModelFromConfig = (config?: Record<string, any>) => {
+	const modelName = config?.model;
+	if (typeof modelName !== 'string' || !modelName) return undefined;
+	return (mongoModels as Record<string, any>)[modelName] || (mongoose.models as Record<string, any>)[modelName];
+};
+
+const actionHandlers: Record<string, (params?: any, model?: any) => Promise<any>> = {
 	"mongoose.findMany": mongooseFindManyAction,
 	"mongoose.create": mongooseCreateAction
 };
@@ -36,9 +120,10 @@ export const newAccountFlow = async (input: any = {}) => {
 
   const stepMeta1 = steps[0] || {};
   const stepName1 = toStepKey(stepMeta1?.name || stepMeta1?.id || 'step1');
-  const stepInput1 = { ...context, ...(stepMeta1?.inputs || {}), ...(stepMeta1?.inputMap || {}) };
-  const stepConfig1 = stepMeta1?.config || {};
   const stepActionKey1 = resolveTemplateKey(stepMeta1?.actionId);
+	const stepInput1 = buildStepInput(stepMeta1, stepActionKey1, context);
+	const stepConfig1 = stepMeta1?.config || {};
+	const stepModel1 = resolveModelFromConfig(stepConfig1);
   const stepActionHandler1 = actionHandlers[stepActionKey1];
   const stepResult1 = stepActionHandler1
   	? await stepActionHandler1({
@@ -47,7 +132,7 @@ export const newAccountFlow = async (input: any = {}) => {
   			step: stepMeta1,
   			context: context,
   			flowMeta,
-  		})
+		}, stepModel1)
   	: { skipped: true, reason: 'No action handler for ' + (stepActionKey1 || 'unknown') };
   results[stepName1] = stepResult1;
   context = {
@@ -58,9 +143,10 @@ export const newAccountFlow = async (input: any = {}) => {
 
   const stepMeta2 = steps[1] || {};
   const stepName2 = toStepKey(stepMeta2?.name || stepMeta2?.id || 'step2');
-  const stepInput2 = { ...context, ...(stepMeta2?.inputs || {}), ...(stepMeta2?.inputMap || {}) };
-  const stepConfig2 = stepMeta2?.config || {};
   const stepActionKey2 = resolveTemplateKey(stepMeta2?.actionId);
+	const stepInput2 = buildStepInput(stepMeta2, stepActionKey2, context);
+	const stepConfig2 = stepMeta2?.config || {};
+	const stepModel2 = resolveModelFromConfig(stepConfig2);
   const stepActionHandler2 = actionHandlers[stepActionKey2];
   const stepResult2 = stepActionHandler2
   	? await stepActionHandler2({
@@ -69,7 +155,7 @@ export const newAccountFlow = async (input: any = {}) => {
   			step: stepMeta2,
   			context: context,
   			flowMeta,
-  		})
+		}, stepModel2)
   	: { skipped: true, reason: 'No action handler for ' + (stepActionKey2 || 'unknown') };
   results[stepName2] = stepResult2;
   context = {
@@ -80,8 +166,9 @@ export const newAccountFlow = async (input: any = {}) => {
 
   const stepMeta3 = steps[2] || {};
   const stepName3 = toStepKey(stepMeta3?.name || stepMeta3?.id || 'step3');
-  const stepInput3 = { ...context, ...(stepMeta3?.inputs || {}), ...(stepMeta3?.inputMap || {}) };
+  const stepInput3 = { ...context, ...(stepMeta3?.inputs || {}), ...getStepInputMap(stepMeta3) };
   const stepConfig3 = stepMeta3?.config || {};
+  const stepModel3 = resolveModelFromConfig(stepConfig3);
   const stepActionKey3 = resolveTemplateKey(stepMeta3?.actionId);
   const stepActionHandler3 = actionHandlers[stepActionKey3];
   const stepResult3 = stepActionHandler3
@@ -91,7 +178,7 @@ export const newAccountFlow = async (input: any = {}) => {
   			step: stepMeta3,
   			context: context,
   			flowMeta,
-  		})
+		}, stepModel3)
   	: { skipped: true, reason: 'No action handler for ' + (stepActionKey3 || 'unknown') };
   results[stepName3] = stepResult3;
   context = {
@@ -102,8 +189,9 @@ export const newAccountFlow = async (input: any = {}) => {
 
   const stepMeta4 = steps[3] || {};
   const stepName4 = toStepKey(stepMeta4?.name || stepMeta4?.id || 'step4');
-  const stepInput4 = { ...context, ...(stepMeta4?.inputs || {}), ...(stepMeta4?.inputMap || {}) };
+  const stepInput4 = { ...context, ...(stepMeta4?.inputs || {}), ...getStepInputMap(stepMeta4) };
   const stepConfig4 = stepMeta4?.config || {};
+  const stepModel4 = resolveModelFromConfig(stepConfig4);
   const stepActionKey4 = resolveTemplateKey(stepMeta4?.actionId);
   const stepActionHandler4 = actionHandlers[stepActionKey4];
   const stepResult4 = stepActionHandler4
@@ -113,7 +201,7 @@ export const newAccountFlow = async (input: any = {}) => {
   			step: stepMeta4,
   			context: context,
   			flowMeta,
-  		})
+		}, stepModel4)
   	: { skipped: true, reason: 'No action handler for ' + (stepActionKey4 || 'unknown') };
   results[stepName4] = stepResult4;
   context = {
@@ -133,8 +221,9 @@ export const newAccountFlowMeta = {
 };
 
 export const newAccountContextHandler = (payload?: any) => {
-	if (payload && typeof payload === 'object') {
-		return newAccountFlow({ ...payload, flowMeta: newAccountFlowMeta });
+	const userPayload = normalizeAuthPayload(payload);
+	if (isPlainObject(payload)) {
+		return newAccountFlow({ ...payload, ...userPayload, flowMeta: newAccountFlowMeta });
 	}
-	return newAccountFlow({ value: payload, flowMeta: newAccountFlowMeta });
+	return newAccountFlow({ ...userPayload, value: payload, flowMeta: newAccountFlowMeta });
 };
