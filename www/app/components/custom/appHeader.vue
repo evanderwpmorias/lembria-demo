@@ -1,177 +1,248 @@
-<template>
-  <div>
-    <!-- ================================================================
-         DESKTOP (md+): Top Navigation Bar — Material Design 3 style
-         ================================================================ -->
-    <header class="flex sticky top-0 z-40 items-center justify-between h-16 px-6 lg:px-8 border-b border-white/10 bg-stone-950/10 backdrop-blur">
-     <button
-        type="button"
-        class="flex md:hidden items-center justify-center w-10 h-10 rounded-full text-on-surface-variant transition-colors duration-200 hover:bg-on-surface-variant/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        :aria-expanded="drawerOpen"
-        aria-controls="mobile-drawer"
-        aria-label="Toggle navigation menu"
-        @click="drawerOpen = !drawerOpen"
-      >
-        <span class="material-symbols-outlined select-none text-2xl">
-          {{ drawerOpen ? 'close' : 'menu' }}
-        </span>
-      </button>
-      <!-- Logo -->
-      <NuxtLink to="/" class="flex items-center gap-3 shrink-0">
-        <img src="/logo_name.svg" alt="Lembria" class="h-7 object-contain" />
-    
-      </NuxtLink>
-
-      <!-- Center destinations — MD3 Navigation Bar style with indicator pills -->
-      <nav class="hidden md:flex items-center gap-1" role="navigation" aria-label="Main navigation">
-        <NuxtLink
-          v-for="item in navItems"
-          :key="item.to"
-          :to="item.to"
-          class="group flex items-center gap-2 h-9 px-4 rounded-full transition-all duration-200 ease-in-out cursor-pointer"
-          :class="isActive(item.to)
-            ? 'bg-secondary-container text-on-secondary-container'
-            : 'text-on-surface-variant hover:bg-on-surface-variant/8 hover:text-on-surface'"
-          :aria-current="isActive(item.to) ? 'page' : undefined"
-        >
-          <span class="material-symbols-outlined select-none" style="font-size:1.25rem;line-height:1">{{ item.icon }}</span>
-          <span class="text-[13px] font-medium tracking-wide">{{ item.label }}</span>
-        </NuxtLink>
-      </nav>
-
-      <!-- Actions -->
-      <div class="flex items-center gap-2 shrink-0">
-        <NuxtLink
-          to="/sign-in"
-          class="hidden lg:inline-flex items-center gap-1.5 h-9 px-4 rounded-full border border-outline text-primary text-sm font-medium transition-all duration-200 hover:bg-primary/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        >
-          <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">login</span>
-          Sign In
-        </NuxtLink>
-        <NuxtLink
-          to="/sign-up"
-          class="inline-flex items-center gap-1.5 h-9 px-5 rounded-full bg-primary text-on-primary text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary/92 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        >
-          <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
-          <span class="hidden lg:inline">Get Started</span>
-        </NuxtLink>
-      </div>
-    </header>
-
-    <!-- ================================================================
-         MOBILE: Navigation Drawer (MD3 modal drawer) — slides in from left
-         ================================================================ -->
-    <!-- Scrim -->
-    <Transition name="scrim">
-      <div
-        v-if="drawerOpen"
-        class="md:hidden fixed inset-0 z-50 bg-scrim/40"
-        aria-hidden="true"
-        @click="drawerOpen = false"
-      />
-    </Transition>
-
-    <!-- Drawer panel -->
-    <Transition name="drawer">
-      <nav
-        v-if="drawerOpen"
-        id="mobile-drawer"
-        class="md:hidden fixed left-0 top-0 bottom-0 z-50 flex flex-col w-72 bg-surface-container-low rounded-r-[1.75rem] shadow-xl overflow-y-auto"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        <!-- Drawer header -->
-        <div class="flex items-center justify-between h-14 px-4 border-b border-outline-variant/50">
-          <NuxtLink to="/" class="flex items-center gap-2" @click="drawerOpen = false">
-            <img src="/logo_name.svg" alt="Lembria" class="h-7 object-contain" />
-          </NuxtLink>
-          <button
-            type="button"
-            class="flex items-center justify-center w-10 h-10 rounded-full text-on-surface-variant transition-colors duration-200 hover:bg-on-surface-variant/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label="Close navigation menu"
-            @click="drawerOpen = false"
-          >
-            <span class="material-symbols-outlined select-none text-2xl">close</span>
-          </button>
-        </div>
-
-        <!-- Destination items -->
-        <div class="flex flex-col gap-0.5 px-3 pt-3">
-          <NuxtLink
-            v-for="item in navItems"
-            :key="item.to"
-            :to="item.to"
-            class="group flex items-center gap-3 h-14 px-4 rounded-full transition-all duration-200"
-            :class="isActive(item.to)
-              ? 'bg-secondary-container text-on-secondary-container'
-              : 'text-on-surface-variant hover:bg-on-surface-variant/8 hover:text-on-surface'"
-            :aria-current="isActive(item.to) ? 'page' : undefined"
-            @click="drawerOpen = false"
-          >
-            <span class="material-symbols-outlined select-none shrink-0" style="font-size:1.375rem;line-height:1">{{ item.icon }}</span>
-            <span class="text-sm font-medium tracking-wide">{{ item.label }}</span>
-          </NuxtLink>
-        </div>
-
-        <!-- Divider -->
-        <div class="mx-4 my-3 h-px bg-outline-variant/50" aria-hidden="true" />
-
-        <!-- Auth actions -->
-        <div class="flex flex-col gap-2 px-4">
-          <NuxtLink
-            to="/sign-in"
-            class="flex items-center gap-3 h-14 px-4 rounded-full text-on-surface-variant hover:bg-on-surface-variant/8 hover:text-on-surface transition-all duration-200"
-            :class="isActive('/sign-in') ? 'bg-secondary-container text-on-secondary-container' : ''"
-            @click="drawerOpen = false"
-          >
-            <span class="material-symbols-outlined select-none shrink-0" style="font-size:1.375rem;line-height:1">login</span>
-            <span class="text-sm font-medium tracking-wide">Sign In</span>
-          </NuxtLink>
-          <NuxtLink
-            to="/sign-up"
-            class="flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-primary text-on-primary text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary/92 hover:shadow-md"
-            @click="drawerOpen = false"
-          >
-            <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
-            Get Started
-          </NuxtLink>
-        </div>
-      </nav>
-    </Transition>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from '#vue-router'
+import { appAccountMenu } from '@/data/menus'
+import { useActiveUserStore } from '@/stores/user'
+import { iconBtnStandard, topAppBar, topAppBarTrailing } from '@/theme/md-theme'
+
+const props = defineProps<{
+  isMobileDrawerOpen: boolean
+  isRailExpanded: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'toggle-mobile-drawer'): void
+  (e: 'toggle-rail'): void
+}>()
 
 const route = useRoute()
-const drawerOpen = ref(false)
+const userStore = useActiveUserStore()
+const accountOpen = ref(false)
+const searchText = ref('')
+const mobileSearchOpen = ref(false)
 
-// Close drawer on route change
-watch(() => route.path, () => { drawerOpen.value = false })
+watch(() => route.path, () => {
+  accountOpen.value = false
+  mobileSearchOpen.value = false
+  searchText.value = ''
+})
 
-const navItems = [
-  { to: '/',             label: 'Home',         icon: 'home'          },
-  { to: '/how-it-works', label: 'How it works',  icon: 'help'          },
-  { to: '/stories',      label: 'Stories',       icon: 'auto_stories'  },
-  { to: '/trust',        label: 'Trust',         icon: 'verified_user' },
-]
+const accountItems = appAccountMenu.menuItems
+const user = computed(() => userStore.user)
 
-const isActive = (path: string): boolean => {
-  if (path === '/') return route.path === '/'
+const userName = computed(() => {
+  const currentUser = user.value
+  if (!currentUser)
+    return 'Account'
+
+  return currentUser.displayName || currentUser.email?.split('@')[0] || 'Account'
+})
+
+const userAvatarUrl = computed(() => user.value?.photoURL || '')
+const userInitials = computed(() => {
+  const name = userName.value.trim()
+  if (!name)
+    return 'A'
+
+  const parts = name.split(' ').filter(Boolean)
+  if (parts.length === 1)
+    return parts[0]!.slice(0, 2).toUpperCase()
+
+  return `${parts[0]![0] || ''}${parts[1]![0] || ''}`.toUpperCase()
+})
+
+const handleLogout = async () => {
+  await userStore.logoutUser()
+  await navigateTo('/sign-in')
+}
+
+const isAccountActive = (path: string): boolean => {
+  if (path === '/app/account')
+    return route.path.startsWith('/app/account') || route.path.startsWith('/app/profile')
+
   return route.path.startsWith(path)
 }
 </script>
 
-<style>
-.scrim-enter-active,
-.scrim-leave-active { transition: opacity 0.25s ease; }
-.scrim-enter-from,
-.scrim-leave-to    { opacity: 0; }
+<template>
+  <header :class="topAppBar" class="px-3 md:px-5">
+    <div class="w-full">
+      <div class="flex h-14 items-center gap-2 md:h-16">
+        <!-- Menu / rail toggle -->
+        <div class="md:w-20">
+          <button
+            type="button"
+            :class="iconBtnStandard"
+            class="md:hidden"
+            :aria-expanded="props.isMobileDrawerOpen"
+            aria-label="Open navigation drawer"
+            @click="emit('toggle-mobile-drawer')"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
 
-.drawer-enter-active,
-.drawer-leave-active { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-.drawer-enter-from,
-.drawer-leave-to    { transform: translateX(-100%); }
+          <div class="hidden md:inline-flex">
+            <button
+              type="button"
+              :class="iconBtnStandard"
+              :aria-expanded="props.isRailExpanded"
+              aria-label="Expand navigation rail"
+              @click="emit('toggle-rail')"
+            >
+              <span class="material-symbols-outlined">{{ props.isRailExpanded ? 'menu' : 'menu_open' }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Logo -->
+        <NuxtLink to="/app/home" class="flex shrink-0 items-center gap-2 px-1">
+          <img src="/logo_name.svg" alt="Lembria" class="hidden md:inline h-7 object-contain md:h-8" />
+          <img src="/logo_slim.svg" alt="Lembria" class="md:hidden h-7 object-contain md:h-8" />
+        </NuxtLink>
+
+        <!-- Desktop search bar -->
+        <div class="hidden min-w-0 flex-1 md:block">
+          <label class="flex h-11 items-center gap-2 max-w-2xl mx-auto rounded-full border border-outline bg-surface-container px-4 text-on-surface-variant">
+            <span class="material-symbols-outlined text-[20px]">search</span>
+            <input
+              v-model="searchText"
+              type="search"
+              class="w-full bg-transparent text-sm text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none"
+              placeholder="Search memories, people, events, topics, stories..."
+              aria-label="Search across family archive"
+            >
+          </label>
+        </div>
+
+        <!-- Mobile search bar (shown when mobileSearchOpen) -->
+        <Transition name="search-expand">
+          <div v-if="mobileSearchOpen" class="min-w-0 flex-1 md:hidden">
+            <label class="flex h-11 items-center gap-2 rounded-full border border-outline bg-surface-container px-4 text-on-surface-variant">
+              <span class="material-symbols-outlined text-[20px]">search</span>
+              <input
+                v-model="searchText"
+                type="search"
+                class="w-full bg-transparent text-sm text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none"
+                placeholder="Search..."
+                aria-label="Search across family archive"
+                autofocus
+              >
+            </label>
+          </div>
+        </Transition>
+
+        <!-- Trailing actions -->
+        <div :class="topAppBarTrailing" class="ml-auto">
+          <!-- Mobile search open button (hidden when search is active) -->
+          <button
+            v-if="!mobileSearchOpen"
+            type="button"
+            :class="iconBtnStandard"
+            class="md:hidden"
+            aria-label="Open search"
+            @click="mobileSearchOpen = true"
+          >
+            <span class="material-symbols-outlined">search</span>
+          </button>
+
+          <!-- Notifications (hidden on mobile when search is active) -->
+          <NuxtLink
+             v-if="!mobileSearchOpen"
+            :class="[iconBtnStandard, mobileSearchOpen ? 'hidden md:inline-flex' : '']"
+            to="/app/profile/notifications"
+            aria-label="Notifications"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </NuxtLink>
+
+          <!-- Account menu (hidden on mobile when search is active) -->
+          <div class="relative" :class="mobileSearchOpen ? 'hidden md:block' : ''">
+            <button
+              type="button"
+              class="inline-flex h-10 items-center gap-2 rounded-full border border-outline px-2.5 text-on-surface transition-colors hover:bg-on-surface/8"
+              :aria-expanded="accountOpen"
+              aria-label="Open account menu"
+              @click="accountOpen = !accountOpen"
+            >
+              <img v-if="userAvatarUrl" :src="userAvatarUrl" alt="User avatar" class="h-6 w-6 rounded-full object-cover">
+              <span v-else class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-secondary-container text-[11px] font-semibold text-on-secondary-container">{{ userInitials }}</span>
+              <span class="hidden max-w-28 truncate text-sm font-medium lg:inline">{{ userName }}</span>
+              <span class="material-symbols-outlined text-[20px]">arrow_drop_down</span>
+            </button>
+
+            <Transition name="fade-scale">
+              <div
+                v-if="accountOpen"
+                class="absolute right-0 z-50 mt-2 w-72 rounded-2xl border border-outline-variant bg-surface-container p-2 shadow-xl"
+              >
+                <div class="mb-2 rounded-xl bg-surface-container-high px-3 py-2">
+                  <p class="truncate text-sm font-semibold text-on-surface">{{ userName }}</p>
+                  <p class="truncate text-xs text-on-surface-variant">{{ user?.email || 'No email available' }}</p>
+                </div>
+
+                <NuxtLink
+                  v-for="item in accountItems.filter((item) => item.type !== 'action')"
+                  :key="item.url"
+                  :to="item.url"
+                  class="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm text-on-surface-variant transition-colors hover:bg-on-surface-variant/8"
+                  :class="isAccountActive(item.url) ? 'bg-secondary-container text-on-secondary-container' : ''"
+                  @click="accountOpen = false"
+                >
+                  <span class="material-symbols-outlined text-[19px]">{{ item.icon }}</span>
+                  <span>{{ item.displayText }}</span>
+                </NuxtLink>
+
+                <div class="my-1 h-px bg-outline-variant" />
+
+                <button
+                  type="button"
+                  class="flex w-full min-h-11 items-center gap-3 rounded-xl px-3 text-left text-sm text-error transition-colors hover:bg-error/10"
+                  @click="handleLogout"
+                >
+                  <span class="material-symbols-outlined text-[19px]">logout</span>
+                  <span>Logout</span>
+                </button>
+              </div>
+            </Transition>
+          </div>
+
+          <!-- Mobile close search button (shown when search is active) -->
+          <button
+            v-if="mobileSearchOpen"
+            type="button"
+            :class="iconBtnStandard"
+            class="md:hidden"
+            aria-label="Close search"
+            @click="mobileSearchOpen = false; searchText = ''"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+</template>
+
+<style scoped>
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition: all 0.16s ease;
+}
+
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+}
+
+.search-expand-enter-active,
+.search-expand-leave-active {
+  transition: all 0.2s ease;
+}
+
+.search-expand-enter-from,
+.search-expand-leave-to {
+  opacity: 0;
+  transform: scaleX(0.9);
+}
 </style>

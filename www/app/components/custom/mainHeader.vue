@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRoute } from '#vue-router'
+import { mainHeaderActionsMenu, mainHeaderNavigationMenu } from '@/data/menus'
 import {
   topAppBar,
   topAppBarTrailing,
@@ -21,12 +22,14 @@ const drawerOpen = ref(false)
 // Close drawer on route change
 watch(() => route.path, () => { drawerOpen.value = false })
 
-const navItems = [
-  { to: '/',             label: 'Home',         icon: 'home'          },
-  { to: '/how-it-works', label: 'How it works',  icon: 'help'          },
-  { to: '/stories',      label: 'Stories',       icon: 'auto_stories'  },
-  { to: '/trust',        label: 'Trust',         icon: 'verified_user' },
-]
+const navItems = mainHeaderNavigationMenu.menuItems.map(({ url, displayText, icon }) => ({
+  to: url,
+  label: displayText,
+  icon,
+}))
+
+const signInItem = mainHeaderActionsMenu.menuItems[0]!
+const signUpItem = mainHeaderActionsMenu.menuItems[1]!
 
 const isActive = (path: string): boolean => {
   if (path === '/') return route.path === '/'
@@ -78,15 +81,15 @@ const isActive = (path: string): boolean => {
     <div :class="topAppBarTrailing">
       <!-- Sign In — desktop only -->
       <div class="hidden lg:flex">
-        <NuxtLink to="/sign-in" :class="btnOutlined">
-          <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">login</span>
-          Sign In
+        <NuxtLink :to="signInItem.url" :class="btnOutlined">
+          <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">{{ signInItem.icon }}</span>
+          {{ signInItem.displayText }}
         </NuxtLink>
       </div>
       <!-- Get Started — always visible -->
-      <NuxtLink to="/sign-up" :class="btnFilled">
-        <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
-        <span class="hidden lg:inline">Get Started</span>
+      <NuxtLink :to="signUpItem.url" :class="btnFilled">
+        <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">{{ signUpItem.icon }}</span>
+        <span class="hidden lg:inline">{{ signUpItem.displayText }}</span>
       </NuxtLink>
     </div>
     </div>
@@ -153,22 +156,22 @@ const isActive = (path: string): boolean => {
       <!-- Auth actions -->
       <div class="flex flex-col gap-2">
         <NuxtLink
-          to="/sign-in"
+          :to="signInItem.url"
           :class="navDrawerItem"
-          :aria-selected="isActive('/sign-in') ? 'true' : undefined"
+          :aria-selected="isActive(signInItem.url) ? 'true' : undefined"
           @click="drawerOpen = false"
         >
-          <span class="material-symbols-outlined select-none shrink-0" style="font-size:1.375rem;line-height:1">login</span>
-          <span>Sign In</span>
+          <span class="material-symbols-outlined select-none shrink-0" style="font-size:1.375rem;line-height:1">{{ signInItem.icon }}</span>
+          <span>{{ signInItem.displayText }}</span>
         </NuxtLink>
         <div class="mx-3 mt-1">
           <NuxtLink
-            to="/sign-up"
+            :to="signUpItem.url"
             :class="[btnFilled, 'w-full']"
             @click="drawerOpen = false"
           >
-            <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
-            Get Started
+            <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">{{ signUpItem.icon }}</span>
+            {{ signUpItem.displayText }}
           </NuxtLink>
         </div>
       </div>

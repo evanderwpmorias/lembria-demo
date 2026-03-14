@@ -324,12 +324,43 @@ export const navBarIconActive = `bg-secondary-container text-on-secondary-contai
 
 /**
  * Navigation Rail (Side)
- * Structure:
+ * Active indicator (56 × 32 dp pill) wraps the icon only; label always visible below.
+ * Labels remain visible in condensed mode per MD3 guidelines.
+ * @see https://m3.material.io/components/navigation-rail/guidelines
+ *
+ * Structure (condensed):
  * nav.navRail
- *   a.navItem
+ *   a.navRailItem                              — destination wrapper (group)
+ *     div.[navRailIndicatorActive|Inactive]    — 56 × 32 dp pill, icon only
+ *       span.icon
+ *     span.[navRailLabelActive|navRailLabel]   — LabelMedium, centred below pill
+ *
+ * Structure (expanded):
+ * nav.navRail
+ *   a.navRailItemExpanded                      — horizontal row like navDrawerItem
+ *     span.icon
+ *     span.label
  */
-export const navRail = `flex flex-col items-center w-20 h-full py-4 bg-surface shadow-sm dark:bg-surface`;
-export const navRailItem = `flex flex-col items-center gap-1 py-4 w-full text-on-surface-variant hover:bg-on-surface-variant/8 active:text-on-surface aria-selected:text-on-surface cursor-pointer ${transitionBase}`;
+export const navRail = `flex flex-col items-center w-20 h-full py-3 bg-surface dark:bg-surface`;
+
+// Condensed destination wrapper — flex-col, icon-pill + label stacked
+export const navRailItem = `group flex flex-col items-center justify-center w-full py-1.5 cursor-pointer ${transitionBase} focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary`;
+
+// Active indicator pill — 56 × 32 dp (w-14 h-8), wraps icon only
+export const navRailIndicator        = `flex items-center justify-center w-14 h-8 rounded-full ${transitionBase}`;
+export const navRailIndicatorActive   = `${navRailIndicator} bg-secondary-container`;
+export const navRailIndicatorInactive = `${navRailIndicator} group-hover:bg-on-surface-variant/8`;
+
+// Icon colour tokens inside the indicator
+export const navRailIconActive   = `text-[24px] text-on-secondary-container`;
+export const navRailIconInactive = `text-[24px] text-on-surface-variant group-hover:text-on-surface`;
+
+// Label — LabelMedium, centred below indicator, always rendered
+export const navRailLabel       = `${typeLabelMedium} text-center mt-1 text-on-surface-variant group-hover:text-on-surface`;
+export const navRailLabelActive = `${typeLabelMedium} text-center mt-1 text-on-secondary-container font-semibold`;
+
+// Expanded destination — horizontal row matching navDrawerItem visual weight
+export const navRailItemExpanded = `flex items-center gap-3 mx-2 px-4 min-h-[56px] rounded-full ${typeLabelLarge} font-medium cursor-pointer ${transitionBase} text-on-surface-variant hover:bg-on-surface-variant/8 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary aria-selected:bg-secondary-container aria-selected:text-on-secondary-container`;
 
 /**
  * Navigation Drawer (Modal & Standard)
