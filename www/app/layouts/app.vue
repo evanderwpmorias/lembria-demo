@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useRoute } from '#vue-router'
 import { useActiveUserStore } from '@/stores/user'
+import { fabExtended } from '@/theme/md-theme'
 
 const userStore = useActiveUserStore()
+const route = useRoute()
 const isMobileDrawerOpen = ref(false)
 const isRailExpanded = ref(false)
+
+const showStudioFab = computed(() => !route.path.toLowerCase().includes('studio'))
 
 const userName = computed(() => {
   const currentUser = userStore.user
@@ -57,5 +62,16 @@ const logout = async () => {
     </div>
 
     <CustomAppMoblieNavBar />
+
+    <NuxtLink
+      v-if="showStudioFab"
+      to="/app/studio"
+      :class="fabExtended"
+      class="fixed bottom-24 right-4 z-40 px-4 md:hidden"
+      aria-label="Start Story"
+    >
+      <span class="material-symbols-outlined text-[24px]" aria-hidden="true">mic</span>
+      <span class="text-base font-medium">Start new Story</span>
+    </NuxtLink>
   </div>
 </template>

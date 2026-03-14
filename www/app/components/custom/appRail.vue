@@ -13,6 +13,8 @@ import {
 	navRailIconInactive,
 	navRailLabel,
 	navRailLabelActive,
+	fabStandard,
+	fabExtended,
 } from '@/theme/md-theme'
 
 const props = defineProps<{
@@ -35,6 +37,8 @@ const primaryItems = appPrimaryNavMenu.menuItems
 const secondaryItems = appSecondaryNavMenu.menuItems
 const accountItems = appAccountMenu.menuItems
 
+const showStudioFab = computed(() => !route.path.toLowerCase().includes('studio'))
+
 const isActive = (path: string): boolean => {
 	if (path === '/app/home')
 		return route.path === '/app' || route.path.startsWith('/app/home')
@@ -55,8 +59,19 @@ const desktopWidthClass = computed(() => (props.expanded ? 'md:w-72' : 'md:w-20'
 	<aside class="hidden md:block md:shrink-0" :class="desktopWidthClass">
 		<div class="sticky top-16 h-[calc(100vh-4rem)] border-r border-outline-variant bg-surface/85 px-2 pb-2 pt-3 backdrop-blur">
 			<nav
-         
-                class="flex h-full flex-col gap-2"  aria-label="App navigation">
+                class="flex h-full flex-col gap-2" aria-label="App navigation">
+				<!-- Studio FAB: icon-only when collapsed, extended when expanded -->
+				<NuxtLink
+					v-if="showStudioFab"
+					to="/app/studio"
+					:class="[props.expanded ? fabExtended : fabStandard, props.expanded ? 'w-full justify-start' : 'mx-auto']"
+					aria-label="Start new story"
+					class="mb-6"
+				>
+					<span class="material-symbols-outlined text-[24px]" aria-hidden="true">mic</span>
+					<span v-if="props.expanded" class="whitespace-nowrap">Start New Story</span>
+				</NuxtLink>
+
 				<!-- Primary destinations -->
 				<NuxtLink
 					v-for="item in primaryItems"
