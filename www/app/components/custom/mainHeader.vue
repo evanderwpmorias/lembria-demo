@@ -39,6 +39,8 @@ const isActive = (path: string): boolean => {
        Top App Bar — MD3 Small Top App Bar (64dp)
        ================================================================ -->
   <header :class="topAppBar" class="text-base">
+    <div class=" max-w-7xl mx-auto w-full flex items-center justify-between h-16 px-4
+     ">
     <!-- Leading: hamburger toggle (mobile only) -->
     <button
       type="button"
@@ -86,6 +88,7 @@ const isActive = (path: string): boolean => {
         <span class="material-symbols-outlined select-none" style="font-size:1rem;line-height:1">person_add</span>
         <span class="hidden lg:inline">Get Started</span>
       </NuxtLink>
+    </div>
     </div>
   </header>
 

@@ -73,3 +73,20 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Firebase Emulator Data Persistence
+
+Use these commands from the `www` folder to keep emulator data between runs:
+
+```bash
+npm run serveEmulators
+```
+
+```bash
+npm run stopEmulators
+```
+
+Notes:
+- `serveEmulators` starts with `--import=./test-data` and attempts export on exit.
+- `stopEmulators` also performs an explicit export recovery step before shutting ports down, which avoids Windows `EPERM` export issues.
+- Use `npm run forceKillEmulators` only when emulators are stuck; it skips the safe export flow.

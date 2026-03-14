@@ -116,14 +116,14 @@ const principles = [
     title: 'Human + AI collaboration',
     description: 'AI can suggest people, places, topics, and events, while your family stays in control of meaning and context. You decide what gets saved and how it\'s organized.'
   },
-  {
-    title: 'Your data, your control',
-    description: 'You can export or delete your data at any time. We provide easy-to-use tools to manage your archive and permissions.'
-  },
-  {
-    title: 'End-to-end encryption',
-    description: 'Your photos, videos, and recordings are encrypted both in transit and at rest. Only you and your authorized family members can access them.'
-  }
+  // {
+  //   title: 'Your data, your control',
+  //   description: 'You can export or delete your data at any time. We provide easy-to-use tools to manage your archive and permissions.'
+  // },
+  // {
+  //   title: 'End-to-end encryption',
+  //   description: 'Your photos, videos, and recordings are encrypted both in transit and at rest. Only you and your authorized family members can access them.'
+  // }
 ]
 
 const commitments = [

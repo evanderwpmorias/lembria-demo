@@ -8,8 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "stopEmulators": "lsof -t -i :9099 -i:5001 -i:8082 -i:9000 -i:5000 -i:8085 -i:9199 | xargs kill -9",
-    "killEmulators": "npx kill-port  9099 5001 8082 9000 5000 8085 9199",
+    "stopEmulators": "node ./scripts/stop-emulators.mjs",
+    "killEmulators": "npm run stopEmulators",
+    "forceKillEmulators": "npx kill-port 4400 5002 9099 5001 8082 5000 8085 9199",
     "serveEmulators": "npm run build && firebase emulators:start --import=./test-data --export-on-exit=./test-data"
   },
   "dependencies": {

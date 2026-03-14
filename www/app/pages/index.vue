@@ -315,10 +315,6 @@ definePageMeta({
                 <span class="material-symbols-outlined">family_restroom</span>
                 Start Building Your Family Story
               </NuxtLink>
-              <a href="#" class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/30 backdrop-blur-sm text-white h-16 px-10 rounded-full font-medium text-lg hover:bg-white/20 transition-colors">
-                <span class="material-symbols-outlined">chat</span>
-                Talk to an Expert
-              </a>
             </div>
           </div>
         </div>
